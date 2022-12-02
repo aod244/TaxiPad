@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#171616"
+    tools:context=".MenuActivity">
+
+    <TextView
+        android:id="@+id/taskstextview"
+        android:layout_width="390dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_style"
+        android:elegantTextHeight="true"
+        android:text="  Brak zaplanowanych kursów"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/helpbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_style"
+        android:gravity="start|center_vertical"
+        android:text="  Zaplanowane Kursy:"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/plantask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kilometersbutton" />
+
+    <TextView
+        android:id="@+id/sessiontimedisplay"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="00:00:00"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/taskstextview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/connectionview"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="Połączenie z Serwerem"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpbutton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/kilometersbutton"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_style"
+        android:text="Przebiegi"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/carmaintenancebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsdonebutton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/helpbutton"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_style"
+        android:text="Pomoc"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/logoutbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskstextview" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logoutbutton"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_style"
+        android:text="Wyloguj"
+        android:textAllCaps="false"
+        android:textColor="#931E1E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/helpbutton"
+        app:layout_constraintTop_toBottomOf="@+id/taskstextview" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/jobsdonebutton"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_style"
+        android:text="Kursy"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/kilometersbutton"
+        app:layout_constraintEnd_toStartOf="@+id/refuelbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessiontimedisplay" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plantask"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_style"
+        android:text="Zaplanuj Kurs"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/carmaintenancebutton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/carmaintenancebutton"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_style"
+        android:text="Koszty Samochodu"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/plantask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/kilometersbutton"
+        app:layout_constraintTop_toBottomOf="@+id/refuelbutton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/refuelbutton"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_style"
+        android:text="Tankowania"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/carmaintenancebutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/jobsdonebutton"
+        app:layout_constraintTop_toBottomOf="@+id/sessiontimedisplay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
