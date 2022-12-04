@@ -24,6 +24,21 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, JobActivity::class.java)
             startActivity(intent)
         }
+        val fuelbutton = findViewById<Button>(R.id.refuelbutton)
+        fuelbutton.setOnClickListener{
+            val intent = Intent(this, FuelActivity::class.java)
+            startActivity(intent)
+        }
+        val kilometersbutton = findViewById<Button>(R.id.kilometersbutton)
+        kilometersbutton.setOnClickListener{
+            val intent = Intent(this, KilometersActivity::class.java)
+            startActivity(intent)
+        }
+        val carbutton = findViewById<Button>(R.id.carmaintenancebutton)
+        carbutton.setOnClickListener{
+            val intent = Intent(this, CarActivity::class.java)
+            startActivity(intent)
+        }
         val planbtn = findViewById<Button>(R.id.plantask)
         planbtn.setOnClickListener{
             Toast.makeText(this,"Działa",Toast.LENGTH_SHORT).show()
