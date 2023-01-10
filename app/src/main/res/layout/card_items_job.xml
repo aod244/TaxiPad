@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="388dp"
+    android:layout_height="60dp"
+    android:background="@drawable/cardview_style">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="296dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#2B2828"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/startTextView"
+            android:layout_width="220dp"
+            android:layout_height="25dp"
+            android:text="Start"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:text="Cena"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="296dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="5dp"
+        android:background="#2B2828"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+
+        <TextView
+            android:id="@+id/endTextView"
+            android:layout_width="220dp"
+            android:layout_height="25dp"
+            android:text="Koniec"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/kmTextView"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:text="KM"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editButton"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_style"
+        android:text="Edytuj"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

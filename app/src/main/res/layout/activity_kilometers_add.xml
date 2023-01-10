@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#222020"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KilometersAddActivity">
+
+    <EditText
+        android:id="@+id/jobStartInput"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_style"
+        android:hint="Początek kursu"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <TextView
+        android:id="@+id/jobdonetitle2"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Dodaj zakończony kurs"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/JobStartInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/connectionview5"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="Połączenie z Serwerem"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

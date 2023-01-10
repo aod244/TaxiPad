@@ -8,26 +8,22 @@
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="-14dp">
 
-    <TextView
-        android:id="@+id/taskstextview2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="390dp"
         android:layout_height="565dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_style"
-        android:elegantTextHeight="true"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button"
         app:layout_constraintBottom_toTopOf="@+id/connectionview2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addfuel" />
+        app:layout_constraintTop_toBottomOf="@+id/tomenubutton" />
 
     <TextView
-        android:id="@+id/kmtitle"
+        android:id="@+id/jobdonetitle"
         android:layout_width="390dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -35,7 +31,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="Menu Tankowań"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/addfuel"
+        app:layout_constraintBottom_toTopOf="@+id/addJobDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,11 +64,11 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addfuel"
-        app:layout_constraintTop_toBottomOf="@+id/kmtitle" />
+        app:layout_constraintStart_toEndOf="@+id/addJobDone"
+        app:layout_constraintTop_toBottomOf="@+id/jobdonetitle" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addfuel"
+        android:id="@+id/addJobDone"
         android:layout_width="125dp"
         android:layout_height="60dp"
         android:layout_marginStart="2dp"
@@ -83,11 +79,11 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/tomenubutton"
-        app:layout_constraintStart_toEndOf="@+id/showrefuels"
-        app:layout_constraintTop_toBottomOf="@+id/kmtitle" />
+        app:layout_constraintStart_toEndOf="@+id/showJobsDone"
+        app:layout_constraintTop_toBottomOf="@+id/jobdonetitle" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/showrefuels"
+        android:id="@+id/showJobsDone"
         android:layout_width="125dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
@@ -97,8 +93,8 @@
         android:text="Wyświetl tankowania"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/addfuel"
+        app:layout_constraintEnd_toStartOf="@+id/addJobDone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kmtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/jobdonetitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,8 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
         supportActionBar?.hide()
+
 
 
         val jobsdonebutton = findViewById<Button>(R.id.jobsdonebutton)

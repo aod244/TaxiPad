@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#222020"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CarAddActivity">
+
+    <EditText
+        android:id="@+id/carFixPrice"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_style"
+        android:hint="Cena"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/carFixKm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carFixDetails" />
+
+    <EditText
+        android:id="@+id/carFixKm"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_style"
+        android:hint="Przebieg"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/carFixDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carFixPrice" />
+
+    <EditText
+        android:id="@+id/carFixDate"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/button_style"
+        android:hint="Data naprawy"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tomenubutton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carFixKm" />
+
+    <EditText
+        android:id="@+id/carFixDetails"
+        android:layout_width="390dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_style"
+        android:hint="Opis kosztu"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/carFixPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carMaintenanceTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tomenubutton3"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button"
+        android:text="Anuluj"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview3"
+        app:layout_constraintEnd_toStartOf="@+id/addCarButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/connectionview3"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_style"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="Połączenie z Serwerem"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addCarButton"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button"
+        android:text="Dodaj koszt"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tomenubutton3" />
+
+    <TextView
+        android:id="@+id/carMaintenanceTitle"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Dodaj koszt eksploatacji"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/carFixDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
