@@ -8,15 +8,25 @@ import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MenuActivity : AppCompatActivity() {
 
+    private lateinit var sqLiteHelper: SQLiteHelper
+    private lateinit var recyclerView: RecyclerView
+    private var adapter: PlanJobAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         supportActionBar?.hide()
 
+        recyclerView = findViewById(R.id.taskRecyclerView)
+        initRecyclerView()
+        sqLiteHelper = SQLiteHelper(this)
+
+        getPlanJobs()
 
 
         val jobsdonebutton = findViewById<Button>(R.id.jobsdonebutton)
@@ -44,7 +54,16 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, MenuActivityPlanJob::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun initRecyclerView(){
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = PlanJobAdapter()
+        recyclerView.adapter = adapter
+    }
 
+    private fun getPlanJobs() {
+        val planjoblist =sqLiteHelper.getplanJOB()
+        adapter?.addItems(planjoblist)
     }
 }

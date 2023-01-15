@@ -22,6 +22,7 @@ class MenuActivityPlanJob : AppCompatActivity() {
 
         val toMainMenuButton = findViewById<Button>(R.id.tomenubutton5)
         val addPlanJobButton = findViewById<Button>(R.id.addPlanJobButton)
+        sqLiteHelper = SQLiteHelper(this)
 
         toMainMenuButton.setOnClickListener {
             finish()

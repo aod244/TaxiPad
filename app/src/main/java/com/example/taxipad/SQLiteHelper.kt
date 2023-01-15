@@ -141,6 +141,39 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun getKM(): ArrayList<KmModel> {
+        val kmList: ArrayList<KmModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME1"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var start: String
+        var end: String
+        var sum: String
+
+        if (cursor.moveToFirst()){
+            do{
+                start = cursor.getString(1)
+                end = cursor.getString(2)
+                sum = cursor.getString(3)
+
+                val std = KmModel(startkm = start, endkm = end, drivenkm = sum)
+                kmList.add(std)
+            }while (cursor.moveToNext())
+        }
+        return  kmList
+
+    }
+
     fun addCARFIX(std: CarModel): Long {
         val db = this.writableDatabase
 
@@ -154,6 +187,41 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         val success = db.insert(TABLE_NAME2, null, contentValues)
         db.close()
         return success
+    }
+
+    fun getCARFIX(): ArrayList<CarModel> {
+        val fixList: ArrayList<CarModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var details: String
+        var price: String
+        var carkm: String
+        var fixdate:String
+
+        if (cursor.moveToFirst()){
+            do{
+                details = cursor.getString(1)
+                price = cursor.getString(2)
+                carkm = cursor.getString(3)
+                fixdate = cursor.getString(4)
+
+                val std = CarModel(fixdetails = details, fixprice = price, carkm = carkm, fixdate = fixdate)
+                fixList.add(std)
+            }while (cursor.moveToNext())
+        }
+        return  fixList
+
     }
 
     fun addFUEL(std: FuelModel): Long {
@@ -171,6 +239,41 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  success
     }
 
+    fun getFUEL(): ArrayList<FuelModel> {
+        val fuelList: ArrayList<FuelModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var details: String
+        var km: String
+        var priceliter: String
+        var liter:String
+
+        if (cursor.moveToFirst()){
+            do{
+                details = cursor.getString(1)
+                km = cursor.getString(2)
+                priceliter = cursor.getString(3)
+                liter = cursor.getString(4)
+
+                val std = FuelModel(detailsfuel = details, kmfuel = km, priceliter = priceliter, liters = liter)
+                fuelList.add(std)
+            }while (cursor.moveToNext())
+        }
+        return  fuelList
+
+    }
+
     fun planJOB(std: PlanModel): Long {
         val db = this.writableDatabase
 
@@ -185,4 +288,36 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun getplanJOB(): ArrayList<PlanModel> {
+        val planJobList: ArrayList<PlanModel> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_NAME4"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var start: String
+        var date: String
+        var price: String
+
+        if (cursor.moveToFirst()){
+            do{
+                start = cursor.getString(1)
+                date = cursor.getString(2)
+                price = cursor.getString(3)
+
+                val std = PlanModel(jobstart = start, jobdate = date, jobprice = price)
+                planJobList.add(std)
+            }while (cursor.moveToNext())
+        }
+        return  planJobList
+
+    }
 }
