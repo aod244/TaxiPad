@@ -12,9 +12,15 @@ class CarActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton)
+        val carfixAddButton = findViewById<Button>(R.id.addCarFixButton)
+
         mainMenuButton.setOnClickListener{
             val intent = Intent(this, MenuActivity::class.java)
             finish()
+        }
+        carfixAddButton.setOnClickListener{
+            val intent = Intent(this, CarAddActivity::class.java)
+            startActivity(intent)
         }
 
     }

@@ -7,13 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".KilometersAddActivity">
 
-    <EditText
-        android:id="@+id/jobStartInput"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tomenubutton4"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/button"
+        android:text="Anuluj"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview5"
+        app:layout_constraintEnd_toStartOf="@+id/addKmButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kmSumInput" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addKmButton"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/button"
+        android:text="Dodaj przebieg"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tomenubutton4"
+        app:layout_constraintTop_toBottomOf="@+id/kmSumInput" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sumKmButton"
+        android:layout_width="190dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button"
+        android:text="Sumuj"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/kmSumInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/kmSumInput"
         android:layout_width="390dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_style"
-        android:hint="Początek kursu"
-        android:inputType="text"
+        android:gravity="center_horizontal|center_vertical"
+        android:lineSpacingExtra="8sp"
+        android:text="Kilometry przejechane"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
@@ -21,18 +68,53 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="118dp" />
+        app:layout_constraintTop_toBottomOf="@+id/sumKmButton" />
+
+    <EditText
+        android:id="@+id/kmEndInput"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_style"
+        android:hint="Przebieg koncowy"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sumKmButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/kmStartInput"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_style"
+        android:hint="Przebieg poczatkowy"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/kmEndInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/jobdonetitle2"
+        android:id="@+id/kmTitle"
         android:layout_width="390dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="110dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Dodaj zakończony kurs"
+        android:text="Dodaj przebieg za dany dzien"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/JobStartInput"
+        app:layout_constraintBottom_toTopOf="@+id/kmStartInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,4 +133,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
     tools:context=".FuelAddActivity">
 
     <TextView
-        android:id="@+id/carMaintenanceTitle2"
+        android:id="@+id/fuelTittle"
         android:layout_width="390dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -16,13 +16,13 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="Dodaj tankowanie"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/carFixDetails2"
+        app:layout_constraintBottom_toTopOf="@+id/fuelDetails"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/carFixDetails2"
+        android:id="@+id/fuelDetails"
         android:layout_width="390dp"
         android:layout_height="100dp"
         android:layout_marginTop="80dp"
@@ -34,13 +34,13 @@
         android:textColorHint="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/carFixKm2"
+        app:layout_constraintBottom_toTopOf="@+id/fuelKm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carMaintenanceTitle2" />
+        app:layout_constraintTop_toBottomOf="@+id/fuelTittle" />
 
     <EditText
-        android:id="@+id/carFixPrice2"
+        android:id="@+id/fuelLiter"
         android:layout_width="390dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -56,10 +56,10 @@
         app:layout_constraintBottom_toTopOf="@+id/tomenubutton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carFixDate2" />
+        app:layout_constraintTop_toBottomOf="@+id/fuelPricePerLiter" />
 
     <EditText
-        android:id="@+id/carFixKm2"
+        android:id="@+id/fuelKm"
         android:layout_width="390dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -71,13 +71,13 @@
         android:textColorHint="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/carFixDate2"
+        app:layout_constraintBottom_toTopOf="@+id/fuelPricePerLiter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carFixDetails2" />
+        app:layout_constraintTop_toBottomOf="@+id/fuelDetails" />
 
     <EditText
-        android:id="@+id/carFixDate2"
+        android:id="@+id/fuelPricePerLiter"
         android:layout_width="390dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -89,10 +89,10 @@
         android:textColorHint="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/carFixPrice2"
+        app:layout_constraintBottom_toTopOf="@+id/fuelLiter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carFixKm2" />
+        app:layout_constraintTop_toBottomOf="@+id/fuelKm" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton2"
@@ -105,11 +105,11 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/connectionview4"
-        app:layout_constraintEnd_toStartOf="@+id/addCarButton2"
+        app:layout_constraintEnd_toStartOf="@+id/addFuelButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addCarButton2"
+        android:id="@+id/addFuelButton"
         android:layout_width="190dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"

@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper;
+import androidx.core.content.contentValuesOf
 
 class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -14,27 +15,64 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         // Name of tables:
         const val TABLE_NAME = "JobsDoneTable"
+        const val TABLE_NAME1 = "KmDrivenTable"
+        const val TABLE_NAME2 = "CarMaintananceTable"
+        const val TABLE_NAME3 = "FuelTable"
+        const val TABLE_NAME4 = "JobPlanTable"
 
         // Common columns:
         const val ID = "id"
         const val DATE = "data"
 
-        // Table 1 columns
+        // Table 0 columns
         const val JOBSTART = "poczatek"
         const val JOBEND = "koniec"
         const val JOBKM = "ilosc"
         const val JOBPRICE = "cena"
 
+        // Table 1 columns
+        const val KMSTART = "przebiegPoczatkowy"
+        const val KMEND = "przebiegKoncowy"
+        const val KMDRIVEN = "przejechaneKm"
+
+        // Table 2 columns
+        const val FIXDETAILS = "opisKosztu"
+        const val FIXPRICE = "cenaNaprawy"
+        const val CARKM = "Przebieg"
+        const val FIXDATE = "DataNaprawy"
+
+        // Table 3 columns
+        const val FUELDETAILS = "nazwaiAdresStacji"
+        const val FUELKM = "przebiegPrzyTankowaniu"
+        const val LITERPRICE = "cenaZaLitr"
+        const val LITERS = "iloscLitrow"
+
+        // Table 4 columns
+        const val PLANJOBSTART = "adresPodjeciaKlienta"
+        const val PLANJOBDATE = "dataICzasPodjecia"
+        const val PLANJOBPRICE = "cenaUstalona"
 
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + JOBSTART + " TEXT," + JOBEND + " TEXT," + JOBKM + " TEXT," + JOBPRICE + " TEXT" + ")")
+        val createTable = ("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + JOBSTART + " TEXT," + JOBEND + " TEXT," + JOBKM + " TEXT," + JOBPRICE + " TEXT" + ")");
+        val createTable1 = ("CREATE TABLE " + TABLE_NAME1 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KMSTART + " TEXT," + KMEND + " TEXT," + KMDRIVEN + " TEXT" + ")");
+        val createTable2 = ("CREATE TABLE " + TABLE_NAME2 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FIXDETAILS + " TEXT," + FIXPRICE + " TEXT," + CARKM + " TEXT," + FIXDATE + " TEXT" + ")");
+        val createTable3 = ("CREATE TABLE " + TABLE_NAME3 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FUELDETAILS + " TEXT," + FUELKM + " TEXT," + LITERPRICE + " TEXT," + LITERS + " TEXT" + ")");
+        val createTable4 = ("CREATE TABLE " + TABLE_NAME4 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + PLANJOBSTART + " TEXT," + PLANJOBDATE + " TEXT," + PLANJOBPRICE + " TEXT" + ")");
         db.execSQL(createTable)
+        db.execSQL(createTable1)
+        db.execSQL(createTable2)
+        db.execSQL(createTable3)
+        db.execSQL(createTable4)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME2")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME1")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME3")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME4")
         onCreate(db)
     }
 
@@ -88,4 +126,63 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  jobList
 
     }
+
+    fun addKM(std:KmModel): Long {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(KMSTART, std.startkm)
+        contentValues.put(KMEND, std.endkm)
+        contentValues.put(KMDRIVEN, std.drivenkm)
+
+        val success = db.insert(TABLE_NAME1, null, contentValues)
+        db.close()
+        return success
+    }
+
+    fun addCARFIX(std: CarModel): Long {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(FIXDETAILS, std.fixdetails)
+        contentValues.put(FIXPRICE, std.fixprice)
+        contentValues.put(CARKM, std.carkm)
+        contentValues.put(FIXDATE, std.fixdate)
+
+        val success = db.insert(TABLE_NAME2, null, contentValues)
+        db.close()
+        return success
+    }
+
+    fun addFUEL(std: FuelModel): Long {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(FUELDETAILS, std.detailsfuel)
+        contentValues.put(FUELKM, std.kmfuel)
+        contentValues.put(LITERPRICE, std.priceliter)
+        contentValues.put(LITERS, std.liters)
+
+        val success = db.insert(TABLE_NAME3, null, contentValues)
+        db.close()
+        return  success
+    }
+
+    fun planJOB(std: PlanModel): Long {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(PLANJOBSTART, std.jobstart)
+        contentValues.put(PLANJOBDATE, std.jobdate)
+        contentValues.put(PLANJOBPRICE, std.jobprice)
+
+        val success = db.insert(TABLE_NAME4, null, contentValues)
+        db.close()
+        return success
+    }
+
 }

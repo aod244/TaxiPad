@@ -12,9 +12,14 @@ class FuelActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton)
+        val addFuelButton = findViewById<Button>(R.id.addFuel)
         mainMenuButton.setOnClickListener{
             val intent = Intent(this, MenuActivity::class.java)
             finish()
+        }
+        addFuelButton.setOnClickListener {
+            val intent = Intent(this,FuelAddActivity::class.java)
+            startActivity(intent)
         }
 
     }

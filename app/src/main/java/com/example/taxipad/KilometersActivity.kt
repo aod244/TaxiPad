@@ -12,9 +12,14 @@ class KilometersActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton)
+        val addKmButton = findViewById<Button>(R.id.addKm)
         mainMenuButton.setOnClickListener{
             val intent = Intent(this, MenuActivity::class.java)
             finish()
+        }
+        addKmButton.setOnClickListener{
+            val intent = Intent(this, KilometersAddActivity::class.java)
+            startActivity(intent)
         }
 
     }

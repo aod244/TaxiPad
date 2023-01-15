@@ -4,6 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#222020"
     tools:context=".MenuActivityPlanJob">
 
+    <TextView
+        android:id="@+id/kmTitle3"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Zaplanuj kurs"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/planJobStartInput"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/button_style"
+        android:hint="Adres podjęcia klienta"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/planJobStartInput2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kmTitle3" />
+
+    <EditText
+        android:id="@+id/planJobStartInput2"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_style"
+        android:hint="Data i czas"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/planJobStartInput3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planJobStartInput" />
+
+    <EditText
+        android:id="@+id/planJobStartInput3"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_style"
+        android:hint="Cena (jeśli ustalona)"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tomenubutton5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planJobStartInput2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tomenubutton5"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button"
+        android:text="Anuluj"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview6"
+        app:layout_constraintEnd_toStartOf="@+id/addPlanJobButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planJobStartInput3" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addPlanJobButton"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button"
+        android:text="Zaplanuj Kurs"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/connectionview6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tomenubutton5"
+        app:layout_constraintTop_toBottomOf="@+id/planJobStartInput3" />
+
+    <TextView
+        android:id="@+id/connectionview6"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_style"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="Połączenie z Serwerem"
+        android:textColor="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

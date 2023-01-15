@@ -7,16 +7,11 @@
     android:background="#222020"
     tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/taskstextview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskRecyclerView"
         android:layout_width="390dp"
         android:layout_height="270dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/button_style"
-        android:elegantTextHeight="true"
-        android:text="  Brak zaplanowanych kursów"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/helpbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,9 +25,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_style"
-        android:gravity="start|center_vertical"
+        android:gravity="center_vertical"
         android:text="  Zaplanowane Kursy:"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/plantask"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kilometersbutton" />
@@ -46,7 +43,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="00:00:00"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/taskstextview"
+        app:layout_constraintBottom_toTopOf="@+id/taskRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +95,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/logoutbutton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskstextview" />
+        app:layout_constraintTop_toBottomOf="@+id/taskRecyclerView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutbutton"
@@ -113,7 +110,7 @@
         android:textColor="#931E1E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/helpbutton"
-        app:layout_constraintTop_toBottomOf="@+id/taskstextview" />
+        app:layout_constraintTop_toBottomOf="@+id/taskRecyclerView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/jobsdonebutton"

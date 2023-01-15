@@ -41,7 +41,8 @@ class MenuActivity : AppCompatActivity() {
         }
         val planbtn = findViewById<Button>(R.id.plantask)
         planbtn.setOnClickListener{
-            Toast.makeText(this,"Działa",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MenuActivityPlanJob::class.java)
+            startActivity(intent)
         }
 
 
