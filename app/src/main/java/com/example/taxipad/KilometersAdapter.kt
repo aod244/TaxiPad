@@ -31,9 +31,19 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
         private var sum = view.findViewById<TextView>(R.id.kmDrivenTextView)
 
         fun bindView(std: KmModel){
-            startkm.text = "Km startowe: ${std.startkm}"
-            endkm.text = "Km końcowe: ${std.endkm}"
-            sum.text = "Suma: ${std.drivenkm} km"
+            startkm.text = buildString {
+                append("Km startowe: ")
+                append(std.startkm)
+            }
+            endkm.text = buildString {
+                append("Km końcowe: ")
+                append(std.endkm)
+            }
+            sum.text = buildString {
+                append("Suma: ")
+                append(std.drivenkm)
+                append(" km")
+            }
         }
     }
 }
