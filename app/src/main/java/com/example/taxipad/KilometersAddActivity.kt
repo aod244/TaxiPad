@@ -12,6 +12,7 @@ class KilometersAddActivity : AppCompatActivity() {
 
     lateinit var startkm: EditText
     lateinit var endkm: EditText
+    lateinit var kmdate: EditText
     lateinit var drivenkm: TextView
 
     private lateinit var sqLiteHelper: SQLiteHelper
@@ -43,10 +44,11 @@ class KilometersAddActivity : AppCompatActivity() {
         val start = startkm.text.toString()
         val end = endkm.text.toString()
         val sum = drivenkm.text.toString()
-        if(start.isEmpty() || end.isEmpty() || sum.isEmpty()){
+        val date = kmdate.text.toString()
+        if(start.isEmpty() || end.isEmpty() || sum.isEmpty() || date.isEmpty()){
             Toast.makeText(this, "Wpisz wszystkie potrzebne informacje!", Toast.LENGTH_SHORT).show()
         }else{
-            val km = KmModel(startkm = start, endkm = end, drivenkm = sum)
+            val km = KmModel(startkm = start, endkm = end, drivenkm = sum, datekm = date)
             val status = sqLiteHelper.addKM(km)
             if(status > -1){
                 Toast.makeText(this, "Przebieg dodany!", Toast.LENGTH_SHORT).show()
@@ -62,6 +64,7 @@ class KilometersAddActivity : AppCompatActivity() {
         startkm = findViewById(R.id.kmStartInput)
         endkm = findViewById(R.id.kmEndInput)
         drivenkm = findViewById(R.id.kmSumInput)
+        kmdate = findViewById(R.id.kmDateInput)
     }
 
     private fun sumKM(){

@@ -29,8 +29,11 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
         private var startkm = view.findViewById<TextView>(R.id.startKmTextView)
         private var endkm = view.findViewById<TextView>(R.id.endKmTextView)
         private var sum = view.findViewById<TextView>(R.id.kmDrivenTextView)
+        private var datekm = view.findViewById<TextView>(R.id.kmDateTextView)
 
         fun bindView(std: KmModel){
+            val string = std.datekm
+            val dateArray: List<String> = string.split(" ")
             startkm.text = buildString {
                 append("Km startowe: ")
                 append(std.startkm)
@@ -44,6 +47,11 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
                 append(std.drivenkm)
                 append(" km")
             }
+            datekm.text = buildString {
+                append("Data: ")
+                append(dateArray[0])
+            }
+
         }
     }
 }

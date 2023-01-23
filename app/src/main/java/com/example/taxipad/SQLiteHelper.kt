@@ -55,10 +55,10 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + JOBSTART + " TEXT," + JOBEND + " TEXT," + JOBKM + " TEXT," + JOBPRICE + " TEXT" + ")");
-        val createTable1 = ("CREATE TABLE " + TABLE_NAME1 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KMSTART + " TEXT," + KMEND + " TEXT," + KMDRIVEN + " TEXT" + ")");
+        val createTable = ("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + JOBSTART + " TEXT," + JOBEND + " TEXT," + JOBKM + " TEXT," + JOBPRICE + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
+        val createTable1 = ("CREATE TABLE " + TABLE_NAME1 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KMSTART + " TEXT," + KMEND + " TEXT," + KMDRIVEN + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
         val createTable2 = ("CREATE TABLE " + TABLE_NAME2 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FIXDETAILS + " TEXT," + FIXPRICE + " TEXT," + CARKM + " TEXT," + FIXDATE + " TEXT" + ")");
-        val createTable3 = ("CREATE TABLE " + TABLE_NAME3 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FUELDETAILS + " TEXT," + FUELKM + " TEXT," + LITERPRICE + " TEXT," + LITERS + " TEXT" + ")");
+        val createTable3 = ("CREATE TABLE " + TABLE_NAME3 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FUELDETAILS + " TEXT," + FUELKM + " TEXT," + LITERPRICE + " TEXT," + LITERS + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
         val createTable4 = ("CREATE TABLE " + TABLE_NAME4 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + PLANJOBSTART + " TEXT," + PLANJOBDATE + " TEXT," + PLANJOBPRICE + " TEXT" + ")");
         db.execSQL(createTable)
         db.execSQL(createTable1)
@@ -159,14 +159,16 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var start: String
         var end: String
         var sum: String
+        var date: String
 
         if (cursor.moveToFirst()){
             do{
                 start = cursor.getString(1)
                 end = cursor.getString(2)
                 sum = cursor.getString(3)
+                date = cursor.getString(4)
 
-                val std = KmModel(startkm = start, endkm = end, drivenkm = sum)
+                val std = KmModel(startkm = start, endkm = end, drivenkm = sum, datekm = date)
                 kmList.add(std)
             }while (cursor.moveToNext())
         }
@@ -241,7 +243,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun getFUEL(): ArrayList<FuelModel> {
         val fuelList: ArrayList<FuelModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+        val selectQuery = "SELECT * FROM $TABLE_NAME3"
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -258,6 +260,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var km: String
         var priceliter: String
         var liter:String
+        var date:String
 
         if (cursor.moveToFirst()){
             do{
@@ -265,8 +268,9 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 km = cursor.getString(2)
                 priceliter = cursor.getString(3)
                 liter = cursor.getString(4)
+                date = cursor.getString(cursor.getColumnIndexOrThrow("data"))
 
-                val std = FuelModel(detailsfuel = details, kmfuel = km, priceliter = priceliter, liters = liter)
+                val std = FuelModel(detailsfuel = details, kmfuel = km, priceliter = priceliter, liters = liter, datefuel = date)
                 fuelList.add(std)
             }while (cursor.moveToNext())
         }

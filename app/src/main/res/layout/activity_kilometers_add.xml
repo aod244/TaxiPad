@@ -7,11 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".KilometersAddActivity">
 
+    <EditText
+        android:id="@+id/kmDateInput"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_style"
+        android:hint="Data"
+        android:inputType="date|datetime"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kmSumInput" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton4"
         android:layout_width="190dp"
         android:layout_height="60dp"
-        android:layout_marginTop="101dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="120dp"
         android:background="@drawable/button"
@@ -21,14 +39,14 @@
         app:layout_constraintBottom_toTopOf="@+id/connectionview5"
         app:layout_constraintEnd_toStartOf="@+id/addKmButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kmSumInput" />
+        app:layout_constraintTop_toBottomOf="@+id/kmDateInput" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addKmButton"
         android:layout_width="190dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="101dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="120dp"
         android:background="@drawable/button"
         android:text="Dodaj przebieg"
@@ -37,7 +55,7 @@
         app:layout_constraintBottom_toTopOf="@+id/connectionview5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tomenubutton4"
-        app:layout_constraintTop_toBottomOf="@+id/kmSumInput" />
+        app:layout_constraintTop_toBottomOf="@+id/kmDateInput" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sumKmButton"

@@ -31,12 +31,29 @@ class FuelAdapter : RecyclerView.Adapter<FuelAdapter.FuelViewHolder>() {
         private var liters = view.findViewById<TextView>(R.id.fuelPriceTextView)
         private var litersprice = view.findViewById<TextView>(R.id.fuelDateTextView)
         private var km = view.findViewById<TextView>(R.id.fuelKmTextView)
+        private var date = view.findViewById<TextView>(R.id.fuelDateView)
 
         fun bindView(std: FuelModel){
-            details.text = "Nazwa i adres: ${std.detailsfuel}"
-            liters.text = std.liters
-            litersprice.text = "Cena: ${std.kmfuel}"
-            km.text = "${std.priceliter} km"
+            val string = std.datefuel
+            val dateArray: List<String> = string.split(" ")
+                details.text = buildString {
+                append("Nazwa i adres: ")
+                append(std.detailsfuel)
+            }
+            liters.text = buildString {
+                append(std.kmfuel)
+                append(" km")
+            }
+            litersprice.text = buildString {
+                append("Cena: ")
+                append(std.liters)
+                append("zł")
+            }
+            km.text = buildString {
+                append(std.priceliter)
+                append(" zł/l")
+            }
+            date.text = dateArray[0]
         }
     }
 }

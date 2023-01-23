@@ -14,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:background="#2B2828"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintEnd_toStartOf="@+id/jobDoneButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,7 +47,7 @@
         android:layout_marginStart="5dp"
         android:background="#2B2828"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintEnd_toStartOf="@+id/jobDoneButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
@@ -72,14 +72,15 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/editButton"
+        android:id="@+id/jobDoneButton"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_style"
-        android:text="Edytuj"
+        android:text="Oznacz jako wykonany"
         android:textColor="#FFFFFF"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

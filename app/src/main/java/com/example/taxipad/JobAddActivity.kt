@@ -35,6 +35,16 @@ class JobAddActivity : AppCompatActivity() {
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton3)
         val addJobButton = findViewById<Button>(R.id.addJobButton)
 
+        val intent = intent
+        val start1 = intent.getStringExtra("Start").toString()
+        val date1 = intent.getStringExtra("Date").toString()
+        val price1 = intent.getStringExtra("Price").toString()
+        if (start1.isNotEmpty() || date1.isNotEmpty() || price1.isNotEmpty()){
+            jobStart.setText(start1)
+            jobPrice.setText(price1)
+            dateInput.setText(date1)
+        }
+
         mainMenuButton.setOnClickListener{
             Intent(this, MenuActivity::class.java)
             finish()
@@ -69,6 +79,7 @@ class JobAddActivity : AppCompatActivity() {
         jobEnd = findViewById(R.id.JobEndInput)
         jobKm = findViewById(R.id.JobKmInput)
         jobPrice = findViewById(R.id.JobPriceInput)
+        dateInput = findViewById(R.id.DateInput)
     }
 
     private fun clearJobView() {
