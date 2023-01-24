@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/kmTitle3"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
         android:text="Zaplanuj kurs"
@@ -22,9 +24,11 @@
 
     <EditText
         android:id="@+id/planJobStartInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Adres podjęcia klienta"
         android:inputType="text"
@@ -40,11 +44,13 @@
 
     <EditText
         android:id="@+id/planJobStartInput2"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Data i czas"
-        android:inputType="date|time"
+        android:inputType="date|text|time"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
@@ -57,8 +63,10 @@
 
     <EditText
         android:id="@+id/planJobStartInput3"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Cena (jeśli ustalona)"
         android:inputType="number"
@@ -74,9 +82,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton5"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="80dp"
@@ -91,11 +99,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addPlanJobButton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/button"
         android:text="Zaplanuj Kurs"
@@ -108,8 +116,10 @@
 
     <TextView
         android:id="@+id/connectionview6"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_style"
         android:gravity="center|center_horizontal|center_vertical"

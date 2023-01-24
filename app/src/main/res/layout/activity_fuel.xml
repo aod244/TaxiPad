@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="390dp"
-        android:layout_height="565dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
@@ -23,9 +23,11 @@
 
     <TextView
         android:id="@+id/fuelTitle2"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
         android:text="Menu Tankowań"
@@ -37,25 +39,23 @@
 
     <TextView
         android:id="@+id/connectionview2"
-        android:layout_width="390dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/cardview_style"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="Połączenie z Serwerem"
-        android:textColor="#4CAF50"
+        android:text="Sumy wyswietlanych tankowań"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/button"
@@ -68,11 +68,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addFuel"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/button"
         android:text="Dodaj Tankowanie"
         android:textAllCaps="false"
@@ -83,11 +83,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/showFuel"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
         android:background="@drawable/button"
         android:text="Wyświetl tankowania"
         android:textAllCaps="false"

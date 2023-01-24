@@ -29,21 +29,12 @@ class JobAddActivity : AppCompatActivity() {
 
         initView()
         getDate()
+        importFromJobPlan()
         sqLiteHelper = SQLiteHelper(this)
 
         //buttons
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton3)
         val addJobButton = findViewById<Button>(R.id.addJobButton)
-
-        val intent = intent
-        val start1 = intent.getStringExtra("Start").toString()
-        val date1 = intent.getStringExtra("Date").toString()
-        val price1 = intent.getStringExtra("Price").toString()
-        if (start1.isNotEmpty() || date1.isNotEmpty() || price1.isNotEmpty()){
-            jobStart.setText(start1)
-            jobPrice.setText(price1)
-            dateInput.setText(date1)
-        }
 
         mainMenuButton.setOnClickListener{
             Intent(this, MenuActivity::class.java)
@@ -93,6 +84,22 @@ class JobAddActivity : AppCompatActivity() {
         val dateNow: String = SimpleDateFormat("MM-dd-yyyy HH:MM", Locale.getDefault()).format(Date())
         val date = findViewById<View>(R.id.DateInput) as TextView
         date.text = dateNow
+    }
+
+    private fun importFromJobPlan() {
+        val intent = intent
+        val start1 = intent.getStringExtra("Start").toString()
+        val date1 = intent.getStringExtra("Date").toString()
+        val price1 = intent.getStringExtra("Price").toString()
+        val success1 = intent.getStringExtra("Success").toString()
+        if (success1 == "1"){
+            jobStart.setText(start1)
+            jobPrice.setText(price1)
+            dateInput.setText(date1)
+        }
+        else{
+            clearJobView()
+        }
     }
 
 }

@@ -9,9 +9,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskRecyclerView"
-        android:layout_width="390dp"
-        android:layout_height="270dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/helpbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,15 +21,15 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_style"
-        android:gravity="center_vertical"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal|center_vertical"
         android:text="  Zaplanowane Kursy:"
-        android:textAlignment="center"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/plantask"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,9 +37,11 @@
 
     <TextView
         android:id="@+id/sessiontimedisplay"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
         android:text="Menu główne"
@@ -50,16 +54,16 @@
 
     <TextView
         android:id="@+id/connectionview"
-        android:layout_width="390dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/cardview_style"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="Połączenie z Serwerem"
-        android:textColor="#4CAF50"
+        android:text="Zliczanie czasu pracy?"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +71,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/kilometersbutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -83,7 +87,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/helpbutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -98,7 +102,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutbutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
@@ -113,7 +117,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/jobsdonebutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -129,7 +133,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/plantask"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
@@ -144,7 +148,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/carmaintenancebutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
@@ -160,7 +164,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/refuelbutton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"

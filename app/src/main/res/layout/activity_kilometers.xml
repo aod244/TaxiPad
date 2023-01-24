@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="390dp"
-        android:layout_height="540dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
@@ -23,9 +23,11 @@
 
     <TextView
         android:id="@+id/kmTitle2"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
         android:text="Przebiegi"
@@ -37,16 +39,15 @@
 
     <TextView
         android:id="@+id/connectionview2"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/cardview_style"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="Połączenie z Serwerem"
-        android:textColor="#4CAF50"
+        android:text="Sumy wyswietlanych kilometrow"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,48 +55,43 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/button"
         android:text="Wyjdź do Menu"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addKm"
         app:layout_constraintTop_toBottomOf="@+id/kmTitle2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addKm"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/button"
         android:text="Dodaj Przebieg"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toStartOf="@+id/tomenubutton"
         app:layout_constraintStart_toEndOf="@+id/showKm"
         app:layout_constraintTop_toBottomOf="@+id/kmTitle2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/showKm"
-        android:layout_width="125dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
         android:background="@drawable/button"
         android:text="Wyświetl Przebiegi"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toStartOf="@+id/addKm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kmTitle2" />

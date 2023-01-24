@@ -43,17 +43,19 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
                 val start = start.text
                 val date = date.text
                 val price = price.text
+                val success = "1"
                 intent.putExtra("Start",start)
                 intent.putExtra("Date",date)
                 intent.putExtra("Price",price)
+                intent.putExtra("Success",success)
                 context.startActivity(intent)
             }
         }
 
         fun bindView(std: PlanModel){
-            start.text = "Start: ${std.jobstart}"
-            date.text = "Data: ${std.jobdate}"
-            price.text = "${std.jobprice} zł"
+            start.text = std.jobstart
+            date.text = std.jobdate
+            price.text = std.jobprice
         }
 
     }

@@ -35,10 +35,16 @@ class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
         private var editButton = view.findViewById<Button>(R.id.editButton)
 
         fun bindView(std: JobModel){
-            start.text = "Start: ${std.start}"
-            end.text = "Koniec: ${std.end}"
-            price.text = "${std.price} zł"
-            km.text = "${std.km} km"
+            start.text = std.start
+            end.text = std.end
+            price.text = buildString {
+                append(std.price)
+                append(" zł")
+            }
+            km.text = buildString {
+                append(std.km)
+                append(" km")
+            }
         }
     }
 }

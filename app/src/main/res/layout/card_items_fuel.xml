@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="388dp"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/cardview_style">
 
     <TextView
         android:id="@+id/fuelDateView"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="7dp"
@@ -24,10 +24,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="296dp"
+        android:layout_width="0dp"
         android:layout_height="65dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
         android:background="#2B2828"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/editButton"
@@ -47,7 +48,7 @@
         <TextView
             android:id="@+id/fuelPriceTextView"
             android:layout_width="80dp"
-            android:layout_height="25dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:text="Ilosc litrow"
             android:textAlignment="center"
@@ -58,9 +59,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="296dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
         android:background="#2B2828"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/editButton"
@@ -90,7 +92,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editButton"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"

@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/fuelTittle"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:gravity="center_horizontal|center_vertical"
         android:text="Dodaj tankowanie"
@@ -23,9 +25,11 @@
 
     <EditText
         android:id="@+id/fuelDetails"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Nazwa i adres stacji"
         android:inputType="text"
@@ -41,9 +45,11 @@
 
     <EditText
         android:id="@+id/fuelLiter"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/button_style"
         android:hint="Cena tankowania"
@@ -60,9 +66,11 @@
 
     <EditText
         android:id="@+id/fuelKm"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Przebieg"
         android:inputType="text"
@@ -78,9 +86,11 @@
 
     <EditText
         android:id="@+id/fuelPricePerLiter"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Cena za litr"
         android:inputType="text"
@@ -96,10 +106,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton2"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button"
         android:text="Anuluj"
         android:textAllCaps="false"
@@ -110,10 +121,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addFuelButton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button"
         android:text="Dodaj tankowanie"
         android:textAllCaps="false"
@@ -124,9 +136,11 @@
 
     <TextView
         android:id="@+id/connectionview4"
-        android:layout_width="390dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/button_style"
         android:gravity="center|center_horizontal|center_vertical"
         android:text="Połączenie z Serwerem"
