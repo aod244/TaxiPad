@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:layout_marginBottom="4dp"
     android:background="@drawable/cardview_style">
 
     <LinearLayout
@@ -73,6 +74,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

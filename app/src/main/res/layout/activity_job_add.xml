@@ -9,9 +9,11 @@
 
     <EditText
         android:id="@+id/JobPriceInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Cena"
         android:inputType="numberDecimal"
@@ -27,9 +29,11 @@
 
     <EditText
         android:id="@+id/DateInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/button_style"
         android:hint="Data i czas"
@@ -46,8 +50,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tomenubutton3"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/button"
@@ -76,9 +81,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addJobButton"
-        android:layout_width="190dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/button"
         android:text="Dodaj Kurs"
@@ -104,9 +110,11 @@
 
     <EditText
         android:id="@+id/JobStartInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Początek kursu"
         android:inputType="text"
@@ -122,9 +130,11 @@
 
     <EditText
         android:id="@+id/JobEndInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Koniec kursu"
         android:inputType="text"
@@ -140,9 +150,11 @@
 
     <EditText
         android:id="@+id/JobKmInput"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/button_style"
         android:hint="Ilość przebytych kilometrów"
         android:inputType="numberDecimal"

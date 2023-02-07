@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:layout_marginBottom="4dp"
     android:background="@drawable/cardview_style">
 
     <LinearLayout
@@ -22,7 +23,7 @@
 
         <TextView
             android:id="@+id/startKmTextView"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="25dp"
             android:text="Poczatkowy przebieg"
             android:textColor="#FFFFFF"
@@ -31,11 +32,11 @@
 
         <TextView
             android:id="@+id/kmDrivenTextView"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"
             android:text="Suma"
-            android:textAlignment="textStart"
+            android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
     </LinearLayout>
@@ -56,7 +57,7 @@
 
         <TextView
             android:id="@+id/endKmTextView"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="25dp"
             android:text="Koncowy przebieg"
             android:textColor="#FFFFFF"
@@ -65,11 +66,11 @@
 
         <TextView
             android:id="@+id/kmDateTextView"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_weight="1"
             android:text="Data"
-            android:textAlignment="textStart"
+            android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
     </LinearLayout>

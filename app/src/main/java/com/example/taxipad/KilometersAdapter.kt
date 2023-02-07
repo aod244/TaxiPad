@@ -47,10 +47,8 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
                 append(std.drivenkm)
                 append(" km")
             }
-            datekm.text = buildString {
-                append("Data: ")
-                append(dateArray[0])
-            }
+            datekm.text = dateArray[0]
+
 
         }
     }

@@ -55,7 +55,10 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
         fun bindView(std: PlanModel){
             start.text = std.jobstart
             date.text = std.jobdate
-            price.text = std.jobprice
+            price.text = buildString {
+                append(std.jobprice)
+                append(" zł")
+            }
         }
 
     }

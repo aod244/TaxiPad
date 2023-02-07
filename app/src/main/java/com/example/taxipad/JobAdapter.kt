@@ -1,5 +1,6 @@
 package com.example.taxipad
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,9 +33,10 @@ class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
         private var end = view.findViewById<TextView>(R.id.endTextView)
         private var price = view.findViewById<TextView>(R.id.priceTextView)
         private var km = view.findViewById<TextView>(R.id.kmTextView)
-        private var editButton = view.findViewById<Button>(R.id.editButton)
+
 
         fun bindView(std: JobModel){
+
             start.text = std.start
             end.text = std.end
             price.text = buildString {

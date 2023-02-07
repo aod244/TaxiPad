@@ -121,10 +121,69 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
                 val std = JobModel(start = start, end = end, price = price, km = km)
                 jobList.add(std)
+
             }while (cursor.moveToNext())
         }
         return  jobList
 
+    }
+
+    fun sumALLJOB(): Double {
+        var sumAllJobPrice: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllJobPrice
+        }
+
+        var price: String
+
+        if(cursor.moveToFirst()){
+            do{
+                price = cursor.getString(4)
+                val addprice = Integer.valueOf(price)
+                sumAllJobPrice += addprice
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllJobPrice
+    }
+
+    fun sumALLJOBKM(): Double {
+        var sumAllJobKM: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllJobKM
+        }
+
+        var km: String
+
+        if(cursor.moveToFirst()){
+            do{
+                km = cursor.getString(3)
+                val addkm = km.toDoubleOrNull()
+                if (addkm != null) {
+                    sumAllJobKM += addkm
+                }
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllJobKM
     }
 
     fun addKM(std:KmModel): Long {

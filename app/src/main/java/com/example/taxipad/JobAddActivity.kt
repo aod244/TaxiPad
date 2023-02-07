@@ -91,10 +91,11 @@ class JobAddActivity : AppCompatActivity() {
         val start1 = intent.getStringExtra("Start").toString()
         val date1 = intent.getStringExtra("Date").toString()
         val price1 = intent.getStringExtra("Price").toString()
+        val dateArray: List<String> = price1.split(" ")
         val success1 = intent.getStringExtra("Success").toString()
         if (success1 == "1"){
             jobStart.setText(start1)
-            jobPrice.setText(price1)
+            jobPrice.setText(dateArray[0])
             dateInput.setText(date1)
         }
         else{
