@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.core.content.contentValuesOf
 
 class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -234,6 +233,35 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  kmList
 
     }
+    fun sumALLKM(): Double {
+        var sumAllKM: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME1"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllKM
+        }
+
+        var km: String
+
+        if(cursor.moveToFirst()){
+            do{
+                km = cursor.getString(3)
+                val addkm = km.toDoubleOrNull()
+                if (addkm != null) {
+                    sumAllKM += addkm
+                }
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllKM
+    }
 
     fun addCARFIX(std: CarModel): Long {
         val db = this.writableDatabase
@@ -283,6 +311,36 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         }
         return  fixList
 
+    }
+
+    fun sumALLCAR(): Double {
+        var sumAllCar: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllCar
+        }
+
+        var Price: String
+
+        if(cursor.moveToFirst()){
+            do{
+                Price = cursor.getString(2)
+                val addCarprice = Price.toDoubleOrNull()
+                if (addCarprice != null) {
+                    sumAllCar += addCarprice
+                }
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllCar
     }
 
     fun addFUEL(std: FuelModel): Long {
@@ -335,6 +393,106 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         }
         return  fuelList
 
+    }
+
+    fun sumALLFUEL(): Double {
+        var sumAllFUEL: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllFUEL
+        }
+
+        var price: String
+
+        if(cursor.moveToFirst()){
+            do{
+                price = cursor.getString(4)
+                val addFuelPrice = price.toDoubleOrNull()
+                if (addFuelPrice != null) {
+                    sumAllFUEL += addFuelPrice
+                }
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllFUEL
+    }
+
+    fun sumALLFUELLITERS(): Double {
+        var sumAllFUELLITERS: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return sumAllFUELLITERS
+        }
+
+        var price: String
+        var priceliter: String
+        var liters: Double
+
+        if(cursor.moveToFirst()){
+            do{
+                price = cursor.getString(4)
+                priceliter = cursor.getString(3)
+                var addFuelPrice = price.toDoubleOrNull()
+                var addPriceLiter = priceliter.toDoubleOrNull()
+                if (addFuelPrice != null) {
+                    if (addPriceLiter != null) {
+                        liters = addFuelPrice/addPriceLiter
+                        sumAllFUELLITERS += liters
+                    }
+                }
+            }while (cursor.moveToNext())
+        }
+
+        return sumAllFUELLITERS
+    }
+
+    fun avgALLFUELPRICE(): Double {
+        var avgFuelPrice: Double = 0.0
+        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return avgFuelPrice
+        }
+
+        var priceliter: String
+        var count: Int = 0
+        var pricelitersum: Double = 0.0
+
+        if(cursor.moveToFirst()){
+            do{
+                priceliter = cursor.getString(3)
+                count += 1
+                var addpriceliter = priceliter.toDoubleOrNull()
+                if (addpriceliter != null) {
+                    pricelitersum += addpriceliter
+                    avgFuelPrice = pricelitersum/count
+                }
+            }while (cursor.moveToNext())
+        }
+        return avgFuelPrice
     }
 
     fun planJOB(std: PlanModel): Long {
