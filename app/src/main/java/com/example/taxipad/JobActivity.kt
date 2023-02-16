@@ -1,24 +1,29 @@
 package com.example.taxipad
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.math.RoundingMode
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class JobActivity : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter: JobAdapter? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +38,16 @@ class JobActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         initRecyclerView()
         sqLiteHelper = SQLiteHelper(this)
-        getJobs()
-        getAllSumJobs()
-        getAllSumJobsKm()
+        val xdate = "today"
+        getJobs(xdate)
+        getAllSumJobs(xdate)
+        getAllSumJobsKm(xdate)
         sumJob.text = adapter?.itemCount.toString()
-
+        val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+        timeStamp.text = buildString {
+            append("bieżącego dnia ")
+        }
         registerForContextMenu(showJobButton)
-
         mainMenuButton.setOnClickListener{
             Intent(this, MenuActivity::class.java)
             finish()
@@ -48,12 +56,12 @@ class JobActivity : AppCompatActivity() {
             val intent = Intent(this, JobAddActivity::class.java)
             startActivity(intent)
         }
-        showJobButton.setOnClickListener{
-            initRecyclerView()
-            getJobs()
-            getAllSumJobsKm()
-            sumJob.text = adapter?.itemCount.toString()
-        }
+//        showJobButton.setOnClickListener{
+//            initRecyclerView()
+//            getJobs(current)
+//            getAllSumJobsKm()
+//            sumJob.text = adapter?.itemCount.toString()
+//        }
     }
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
@@ -68,23 +76,87 @@ class JobActivity : AppCompatActivity() {
 
             R.id.option_1 -> {
                 Toast.makeText(applicationContext, "Opcja 1", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MenuActivity::class.java)
-                startActivity(intent)
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+                timeStamp.text = buildString {
+                    append("bieżącego dnia ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "today"
+                getJobs(xdate)
+                getAllSumJobs(xdate)
+                getAllSumJobsKm(xdate)
+                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+                sumJob.text = adapter?.itemCount.toString()
                 return true
             }
 
             R.id.option_2 -> {
                 Toast.makeText(applicationContext, "Opcja 2", Toast.LENGTH_SHORT).show()
+
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+                timeStamp.text = buildString {
+                    append("ostatniego tygodnia ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "week"
+                getJobs(xdate)
+                getAllSumJobs(xdate)
+                getAllSumJobsKm(xdate)
+                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+                sumJob.text = adapter?.itemCount.toString()
                 return true
             }
 
             R.id.option_3 -> {
                 Toast.makeText(applicationContext, "Opcja 3", Toast.LENGTH_SHORT).show()
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+                timeStamp.text = buildString {
+                    append("bieżącego miesiąca ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "month"
+                getJobs(xdate)
+                getAllSumJobs(xdate)
+                getAllSumJobsKm(xdate)
+                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+                sumJob.text = adapter?.itemCount.toString()
                 return true
             }
 
             R.id.option_4 -> {
-                Toast.makeText(applicationContext, "Opcja 4", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Opcja 3", Toast.LENGTH_SHORT).show()
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+                timeStamp.text = buildString {
+                    append("poprzedniego miesiąca ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "lastmonth"
+                getJobs(xdate)
+                getAllSumJobs(xdate)
+                getAllSumJobsKm(xdate)
+                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+                sumJob.text = adapter?.itemCount.toString()
+                return true
+            }
+
+            R.id.option_5 -> {
+                Toast.makeText(applicationContext, "Opcja 5", Toast.LENGTH_SHORT).show()
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
+                timeStamp.text = buildString {
+                    append("Całości ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "all"
+                getJobs(xdate)
+                getAllSumJobs(xdate)
+                getAllSumJobsKm(xdate)
+                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+                sumJob.text = adapter?.itemCount.toString()
                 return true
             }
 
@@ -100,24 +172,22 @@ class JobActivity : AppCompatActivity() {
 
     }
 
-    private fun getJobs() {
-        val jobList = sqLiteHelper.getJOB()
+    private fun getJobs(xdate: String) {
+        val jobList = sqLiteHelper.getJOB(xdate)
         adapter?.addItems(jobList)
     }
-    private fun getAllSumJobs() {
+    private fun getAllSumJobs(xdate: String) {
         val sumMoney = findViewById<TextView>(R.id.sumMoneyJobDoneView)
-        val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
-        val sum = sqLiteHelper.sumALLJOB()
-        timeStamp.text = "Całości "
+        val sum = sqLiteHelper.sumALLJOB(xdate)
         sumMoney.text = buildString {
             append(sum.toString())
             append(" zł")
         }
 
     }
-    private fun getAllSumJobsKm() {
+    private fun getAllSumJobsKm(xdate: String) {
         val sumKM = findViewById<TextView>(R.id.sumKmDrivenJobDoneView)
-        val sum = sqLiteHelper.sumALLJOBKM()
+        val sum = sqLiteHelper.sumALLJOBKM(xdate)
         val roundedSum = sum.toBigDecimal().setScale(1, RoundingMode.UP)
         sumKM.text = buildString {
             append((roundedSum.toString()))

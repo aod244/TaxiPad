@@ -109,7 +109,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:text="Suma z ostatnich: "
+                android:text="Suma z: "
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 

@@ -4,7 +4,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteOpenHelper
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -91,9 +95,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
-    fun getJOB(): ArrayList<JobModel> {
+    fun getJOB(currentDATE: String): ArrayList<JobModel> {
         val jobList: ArrayList<JobModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -127,9 +153,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
-    fun sumALLJOB(): Double {
-        var sumAllJobPrice: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
+    fun sumALLJOB(currentDATE: String): Double {
+        var sumAllJobPrice = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -155,9 +203,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return sumAllJobPrice
     }
 
-    fun sumALLJOBKM(): Double {
-        var sumAllJobKM: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
+    fun sumALLJOBKM(currentDATE: String): Double {
+        var sumAllJobKM = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -199,9 +269,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
-    fun getKM(): ArrayList<KmModel> {
+    fun getKM(currentDATE: String): ArrayList<KmModel> {
         val kmList: ArrayList<KmModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TABLE_NAME1"
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME1 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME1 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME1"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -233,9 +325,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  kmList
 
     }
-    fun sumALLKM(): Double {
-        var sumAllKM: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME1"
+    fun sumALLKM(currentDATE: String): Double {
+        var sumAllKM = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME1 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME1  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME1 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME1"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -278,9 +392,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
-    fun getCARFIX(): ArrayList<CarModel> {
+    fun getCARFIX(currentDATE: String): ArrayList<CarModel> {
         val fixList: ArrayList<CarModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME2 WHERE date($FIXDATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME2  WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME2  WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME2  WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME2 WHERE date($FIXDATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME2"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -313,9 +449,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
-    fun sumALLCAR(): Double {
-        var sumAllCar: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME2"
+    fun sumALLCAR(currentDATE: String): Double {
+        var sumAllCar = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME2 WHERE date($FIXDATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME2  WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME2  WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME2 WHERE strftime('%Y',$FIXDATE) = strftime('%Y',date('now')) AND  strftime('%m',$FIXDATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME2 WHERE date($FIXDATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME2"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -358,9 +516,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  success
     }
 
-    fun getFUEL(): ArrayList<FuelModel> {
+    fun getFUEL(currentDATE: String): ArrayList<FuelModel> {
         val fuelList: ArrayList<FuelModel> = ArrayList()
-        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME3"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -395,9 +575,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
-    fun sumALLFUEL(): Double {
-        var sumAllFUEL: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+    fun sumALLFUEL(currentDATE: String): Double {
+        var sumAllFUEL = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME3"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -425,9 +627,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return sumAllFUEL
     }
 
-    fun sumALLFUELLITERS(): Double {
-        var sumAllFUELLITERS: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+    fun sumALLFUELLITERS(currentDATE: String): Double {
+        var sumAllFUELLITERS = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME3"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -462,9 +686,31 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return sumAllFUELLITERS
     }
 
-    fun avgALLFUELPRICE(): Double {
-        var avgFuelPrice: Double = 0.0
-        val selectQuery = "SELECT * FROM $TABLE_NAME3"
+    fun avgALLFUELPRICE(currentDATE: String): Double {
+        var avgFuelPrice = 0.0
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val firstDayofWeek: String = simpleDateFormat.format(calendar.time)
+        var x = ""
+        if (currentDATE == "today") {
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) = date('now')"
+        } else if (currentDATE == "month") {
+            x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now'))"
+        } else if (currentDATE == "lastmonth") {
+            val datalist = simpleDateFormat.format(calendar.time).split("-")
+            if (datalist[1] == "01"){
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now', '-1 year')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-2 month'))"
+            } else {
+                x = "SELECT * FROM $TABLE_NAME3  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
+            }
+        } else if (currentDATE== "week"){
+            x = "SELECT * FROM $TABLE_NAME3 WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+        }
+        else {
+            x = "SELECT * FROM $TABLE_NAME3"
+        }
+        val selectQuery = x
         val db = this.readableDatabase
 
         val cursor: Cursor?
@@ -492,6 +738,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 }
             }while (cursor.moveToNext())
         }
+
         return avgFuelPrice
     }
 
