@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -135,16 +134,20 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var start: String
         var end: String
         var price: String
-        var km:String
+        var km: String
+        var date: String
+        var id: Int
 
         if (cursor.moveToFirst()){
             do{
+                id = cursor.getInt(0)
                 start = cursor.getString(1)
                 end = cursor.getString(2)
                 price = cursor.getString(4)
                 km = cursor.getString(3)
+                date = cursor.getString(5)
 
-                val std = JobModel(start = start, end = end, price = price, km = km)
+                val std = JobModel(start = start, end = end, price = price, km = km, ID = id, datejob = date)
                 jobList.add(std)
 
             }while (cursor.moveToNext())

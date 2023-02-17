@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="82dp"
     android:layout_marginBottom="4dp"
     android:background="@drawable/cardview_style">
 
@@ -37,7 +37,7 @@
             android:layout_height="25dp"
             android:layout_weight="1"
             android:text="Cena"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
     </LinearLayout>
@@ -51,6 +51,7 @@
         android:layout_marginEnd="8dp"
         android:background="#2B2828"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/dateTextViewJobCard"
         app:layout_constraintEnd_toStartOf="@+id/editButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
@@ -71,7 +72,7 @@
             android:layout_height="25dp"
             android:layout_weight="1"
             android:text="KM"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -80,14 +81,28 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editButton"
         android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_height="72dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/button"
         android:text="Edytuj"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateTextViewJobCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
+        android:text="Data"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" /> />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

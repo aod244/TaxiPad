@@ -2,14 +2,10 @@ package com.example.taxipad
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -28,7 +24,6 @@ class JobAddActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         initView()
-        getDate()
         importFromJobPlan()
         sqLiteHelper = SQLiteHelper(this)
 
@@ -57,7 +52,6 @@ class JobAddActivity : AppCompatActivity() {
             if(status > -1){
                 Toast.makeText(this, "Kurs dodany!", Toast.LENGTH_SHORT).show()
                 clearJobView()
-                getDate()
                 finish()
             }else {
                 Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
@@ -78,12 +72,6 @@ class JobAddActivity : AppCompatActivity() {
         jobEnd.setText("")
         jobKm.setText("")
         jobPrice.setText("")
-    }
-
-    private fun getDate() {
-        val dateNow: String = SimpleDateFormat("MM-dd-yyyy HH:MM", Locale.getDefault()).format(Date())
-        val date = findViewById<View>(R.id.DateInput) as TextView
-        date.text = dateNow
     }
 
     private fun importFromJobPlan() {

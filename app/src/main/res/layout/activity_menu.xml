@@ -108,7 +108,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/button"
-        android:text="Wyloguj"
+        android:text="Ustawienia"
         android:textAllCaps="false"
         android:textColor="#931E1E"
         app:layout_constraintEnd_toEndOf="parent"

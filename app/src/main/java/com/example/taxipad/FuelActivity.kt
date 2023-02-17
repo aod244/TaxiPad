@@ -15,7 +15,6 @@ import java.math.RoundingMode
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-// Zastanowic sie na wprowadzaniem danych
 class FuelActivity : AppCompatActivity() {
 
     private lateinit var sqLiteHelper: SQLiteHelper

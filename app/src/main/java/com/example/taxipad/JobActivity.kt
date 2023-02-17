@@ -56,12 +56,6 @@ class JobActivity : AppCompatActivity() {
             val intent = Intent(this, JobAddActivity::class.java)
             startActivity(intent)
         }
-//        showJobButton.setOnClickListener{
-//            initRecyclerView()
-//            getJobs(current)
-//            getAllSumJobsKm()
-//            sumJob.text = adapter?.itemCount.toString()
-//        }
     }
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
@@ -75,94 +69,69 @@ class JobActivity : AppCompatActivity() {
         return when (item.itemId) {
 
             R.id.option_1 -> {
-                Toast.makeText(applicationContext, "Opcja 1", Toast.LENGTH_SHORT).show()
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
                 timeStamp.text = buildString {
                     append("bieżącego dnia ")
                 }
-                initRecyclerView()
-                sqLiteHelper = SQLiteHelper(this)
                 val xdate = "today"
-                getJobs(xdate)
-                getAllSumJobs(xdate)
-                getAllSumJobsKm(xdate)
-                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-                sumJob.text = adapter?.itemCount.toString()
+                initSpanTimeFunction(xdate)
                 return true
             }
 
             R.id.option_2 -> {
-                Toast.makeText(applicationContext, "Opcja 2", Toast.LENGTH_SHORT).show()
 
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
                 timeStamp.text = buildString {
                     append("ostatniego tygodnia ")
                 }
-                initRecyclerView()
-                sqLiteHelper = SQLiteHelper(this)
                 val xdate = "week"
-                getJobs(xdate)
-                getAllSumJobs(xdate)
-                getAllSumJobsKm(xdate)
-                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-                sumJob.text = adapter?.itemCount.toString()
+                initSpanTimeFunction(xdate)
                 return true
             }
 
             R.id.option_3 -> {
-                Toast.makeText(applicationContext, "Opcja 3", Toast.LENGTH_SHORT).show()
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
                 timeStamp.text = buildString {
                     append("bieżącego miesiąca ")
                 }
-                initRecyclerView()
-                sqLiteHelper = SQLiteHelper(this)
                 val xdate = "month"
-                getJobs(xdate)
-                getAllSumJobs(xdate)
-                getAllSumJobsKm(xdate)
-                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-                sumJob.text = adapter?.itemCount.toString()
+                initSpanTimeFunction(xdate)
                 return true
             }
 
             R.id.option_4 -> {
-                Toast.makeText(applicationContext, "Opcja 3", Toast.LENGTH_SHORT).show()
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
                 timeStamp.text = buildString {
                     append("poprzedniego miesiąca ")
                 }
-                initRecyclerView()
-                sqLiteHelper = SQLiteHelper(this)
                 val xdate = "lastmonth"
-                getJobs(xdate)
-                getAllSumJobs(xdate)
-                getAllSumJobsKm(xdate)
-                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-                sumJob.text = adapter?.itemCount.toString()
+                initSpanTimeFunction(xdate)
                 return true
             }
 
             R.id.option_5 -> {
-                Toast.makeText(applicationContext, "Opcja 5", Toast.LENGTH_SHORT).show()
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)
                 timeStamp.text = buildString {
                     append("Całości ")
                 }
-                initRecyclerView()
-                sqLiteHelper = SQLiteHelper(this)
                 val xdate = "all"
-                getJobs(xdate)
-                getAllSumJobs(xdate)
-                getAllSumJobsKm(xdate)
-                val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-                sumJob.text = adapter?.itemCount.toString()
+                initSpanTimeFunction(xdate)
                 return true
             }
 
             else -> return super.onContextItemSelected(item)
         }
 
+    }
+
+    private fun initSpanTimeFunction(xdate: String) {
+        initRecyclerView()
+        sqLiteHelper = SQLiteHelper(this)
+        getJobs(xdate)
+        getAllSumJobs(xdate)
+        getAllSumJobsKm(xdate)
+        val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
+        sumJob.text = adapter?.itemCount.toString()
     }
 
     private fun initRecyclerView(){

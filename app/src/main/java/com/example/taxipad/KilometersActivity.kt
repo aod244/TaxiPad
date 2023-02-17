@@ -72,6 +72,51 @@ class KilometersActivity : AppCompatActivity() {
                 sumWorkDays.text = adapter?.itemCount.toString()
                 return true
             }
+            R.id.option_2 -> {
+                val sumWorkDays = findViewById<TextView>(R.id.sumDaysWorkView)
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeViewKM)
+                timeStamp.text = buildString {
+                    append("ostatniego tygodnia ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "week"
+                getKm(xdate)
+                getAllSumJobsKm(xdate)
+                getAllKm(xdate)
+                sumWorkDays.text = adapter?.itemCount.toString()
+                return true
+            }
+            R.id.option_3 -> {
+                val sumWorkDays = findViewById<TextView>(R.id.sumDaysWorkView)
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeViewKM)
+                timeStamp.text = buildString {
+                    append("bieżącego miesiąca ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "month"
+                getKm(xdate)
+                getAllSumJobsKm(xdate)
+                getAllKm(xdate)
+                sumWorkDays.text = adapter?.itemCount.toString()
+                return true
+            }
+            R.id.option_4 -> {
+                val sumWorkDays = findViewById<TextView>(R.id.sumDaysWorkView)
+                val timeStamp = findViewById<TextView>(R.id.spanOfTimeViewKM)
+                timeStamp.text = buildString {
+                    append("poprzedniego miesiąca ")
+                }
+                initRecyclerView()
+                sqLiteHelper = SQLiteHelper(this)
+                val xdate = "lastmonth"
+                getKm(xdate)
+                getAllSumJobsKm(xdate)
+                getAllKm(xdate)
+                sumWorkDays.text = adapter?.itemCount.toString()
+                return true
+            }
 
             R.id.option_5 -> {
                 val sumWorkDays = findViewById<TextView>(R.id.sumDaysWorkView)
