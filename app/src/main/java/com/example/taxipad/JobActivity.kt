@@ -1,12 +1,9 @@
 package com.example.taxipad
 
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -18,9 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.math.RoundingMode
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class JobActivity : AppCompatActivity() {
 
@@ -37,9 +31,6 @@ class JobActivity : AppCompatActivity() {
         val jobAddButton = findViewById<Button>(R.id.addJobDone)
         val showJobButton = findViewById<Button>(R.id.showJobsDone)
         val sumJob = findViewById<TextView>(R.id.sumJobDoneView)
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.edit_job_popup, null)
-        val deleteButton = mDialogView.findViewById<Button>(R.id.buttonDelete)
-
 
         recyclerView = findViewById(R.id.recyclerView)
         initRecyclerView()
@@ -53,7 +44,7 @@ class JobActivity : AppCompatActivity() {
         timeStamp.text = buildString {
             append("bieżącego dnia ")
         }
-        importFromRecycler()
+        importFromRecyclerJob()
         registerForContextMenu(showJobButton)
         mainMenuButton.setOnClickListener{
             Intent(this, MenuActivity::class.java)
@@ -62,9 +53,6 @@ class JobActivity : AppCompatActivity() {
         jobAddButton.setOnClickListener{
             val intent = Intent(this, JobAddActivity::class.java)
             startActivity(intent)
-        }
-        deleteButton.setOnClickListener {
-            Toast.makeText(this, "Test!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -174,7 +162,8 @@ class JobActivity : AppCompatActivity() {
         }
     }
 
-    private fun importFromRecycler() {
+    private fun importFromRecyclerJob() {
+        sqLiteHelper = SQLiteHelper(this)
         val intent2 = intent
         val start = intent2.getStringExtra("Start").toString()
         val end = intent2.getStringExtra("End").toString()
@@ -182,58 +171,65 @@ class JobActivity : AppCompatActivity() {
         val km = intent2.getStringExtra("Km").toString()
         val datejob = intent2.getStringExtra("Date").toString()
         val id = intent2.getStringExtra("ID").toString()
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.edit_job_popup, null)
-        val mBuilder = AlertDialog.Builder(this).setView(mDialogView)
-        val mAlertDialog = mBuilder.create()
-        if(id != "null"){
-            mAlertDialog.show()
-            val editstart = mDialogView.findViewById<EditText>(R.id.editStart)
-            editstart.hint = start
-            val editend = mDialogView.findViewById<EditText>(R.id.editEnd)
-            editend.hint = end
-            val editkm = mDialogView.findViewById<EditText>(R.id.EditKm)
-            editkm.hint = km
-            val editprice = mDialogView.findViewById<EditText>(R.id.editPrice)
-            editprice.hint = price
-            val editdate = mDialogView.findViewById<EditText>(R.id.editDate)
-            editdate.hint = datejob
+        val mDialogViewJob = LayoutInflater.from(this).inflate(R.layout.edit_job_popup, null)
+        val mBuilderJob = AlertDialog.Builder(this).setView(mDialogViewJob)
+        val mAlertDialogJob = mBuilderJob.create()
+        val editStart = mDialogViewJob.findViewById<EditText>(R.id.editStart)
+        editStart.setText(start)
+        val editEnd = mDialogViewJob.findViewById<EditText>(R.id.editEnd)
+        editEnd.setText(end)
+        val editPrice = mDialogViewJob.findViewById<EditText>(R.id.editPrice)
+        editPrice.setText(price)
+        val editKm = mDialogViewJob.findViewById<EditText>(R.id.EditKm)
+        editKm.setText(km)
+        val editDate = mDialogViewJob.findViewById<EditText>(R.id.editDate)
+        editDate.setText(datejob)
 
-            val deleteButton = mDialogView.findViewById<Button>(R.id.buttonDelete)
+        if(id != "null"){
+            mAlertDialogJob.show()
+            val deleteButton = mDialogViewJob.findViewById<Button>(R.id.buttonDelete)
+
             deleteButton.setOnClickListener {
+                sqLiteHelper = SQLiteHelper(this)
                 sqLiteHelper.deleteJob(Integer.valueOf(id))
-                mAlertDialog.dismiss()
+                mAlertDialogJob.dismiss()
             }
-            val cancelButton = mDialogView.findViewById<Button>(R.id.buttonAbort)
-            val editButton = mDialogView.findViewById<Button>(R.id.buttonEdit)
+
+            val cancelButton = mDialogViewJob.findViewById<Button>(R.id.buttonAbort)
+            val editButton = mDialogViewJob.findViewById<Button>(R.id.buttonEdit)
             cancelButton.setOnClickListener {
-                mAlertDialog.dismiss()
+                mAlertDialogJob.dismiss()
+                finish()
             }
+
             editButton.setOnClickListener {
-                if(start.isEmpty() || end.isEmpty() || km.isEmpty() || price.isEmpty() || datejob.isEmpty()){
-                    Toast.makeText(this, "Wpisz wszystkie potrzebne informacje!", Toast.LENGTH_SHORT).show()
-                }else {
-                    val intid = Integer.valueOf(id)
-                    val job = JobModel(
+                sqLiteHelper = SQLiteHelper(this)
+                val intid = Integer.valueOf(id)
+                val newStart = editStart.text.toString()
+                val newEnd = editEnd.text.toString()
+                val newPrice = editPrice.text.toString()
+                val newKm = editKm.text.toString()
+                val newDate = editDate.text.toString()
+                val job = JobModel(
                         ID = intid,
-                        start = start,
-                        end = end,
-                        price = price,
-                        km = km,
-                        datejob = datejob
-                    )
-                    val status = sqLiteHelper.updateJOB(job)
-                    if(status > -1){
-                        Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
-                        mAlertDialog.dismiss()
-                        finish()
-                    }else {
-                        Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
-                    }
+                        start = newStart,
+                        end = newEnd,
+                        price = newPrice,
+                        km = newKm,
+                        datejob = newDate
+                )
+                val status = sqLiteHelper.updateJOB(job)
+                if(status > -1){
+                    Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
+                    mAlertDialogJob.dismiss()
+                    finish()
+                }else {
+                    Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
                 }
             }
         }else {
-            mAlertDialog.show()
-            mAlertDialog.dismiss()
+            mAlertDialogJob.show()
+            mAlertDialogJob.dismiss()
         }
     }
 }

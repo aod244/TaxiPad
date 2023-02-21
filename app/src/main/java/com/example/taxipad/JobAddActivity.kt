@@ -75,12 +75,12 @@ class JobAddActivity : AppCompatActivity() {
     }
 
     private fun importFromJobPlan() {
+        sqLiteHelper = SQLiteHelper(this)
         val intent = intent
         val start1 = intent.getStringExtra("Start").toString()
         val date1 = intent.getStringExtra("Date").toString()
         val price1 = intent.getStringExtra("Price").toString()
-        val id1 = intent.getStringExtra("ID").toString()
-        val id = Integer.valueOf(id1)
+        val id = intent.getIntExtra("ID", 0)
         val dateArray: List<String> = price1.split(" ")
         val success1 = intent.getStringExtra("Success").toString()
         if (success1 == "1"){

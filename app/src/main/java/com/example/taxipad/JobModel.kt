@@ -8,5 +8,5 @@ data class JobModel(
     var km: String = "",
     var price: String = "",
     var datejob: String = "",
-    var ID: Int = 0,
+    var ID: Int = 0
 ){}

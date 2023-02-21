@@ -52,7 +52,7 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
                 val start = start.text
                 val date = date.text
                 val price = price.text
-                val stringid = (std.id).toString()
+                val stringid = (std.id)
                 val success = "1"
                 intent.putExtra("Start",start)
                 intent.putExtra("Date",date)

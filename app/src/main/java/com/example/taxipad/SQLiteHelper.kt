@@ -105,7 +105,8 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         contentValues.put(JOBKM, std.km)
         contentValues.put(JOBPRICE, std.price)
         contentValues.put(DATE, std.datejob)
-        val whereclause = "id=13"
+        val id = (std.ID).toString()
+        val whereclause = "id=$id"
         val success = db.update(TABLE_NAME, contentValues, whereclause, null)
         db.close()
 
@@ -430,6 +431,23 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         val success = db.insert(TABLE_NAME2, null, contentValues)
         db.close()
+        return success
+    }
+
+    fun updateCARFIX(std: CarModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(FIXDETAILS, std.fixdetails)
+        contentValues.put(FIXPRICE, std.fixprice)
+        contentValues.put(CARKM, std.carkm)
+        contentValues.put(FIXDATE, std.fixdate)
+        val id = (std.id).toString()
+        val whereclause = "id=$id"
+        val success = db.update(TABLE_NAME2, contentValues, whereclause, null)
+        db.close()
+
         return success
     }
 

@@ -5,5 +5,6 @@ data class FuelModel(
     val kmfuel: String = "",
     val priceliter: String = "",
     val liters: String = "",
-    val datefuel: String = ""
+    val datefuel: String = "",
+    var id: Int = 0
 ) {}

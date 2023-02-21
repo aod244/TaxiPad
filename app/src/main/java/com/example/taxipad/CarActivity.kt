@@ -4,13 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 import java.math.RoundingMode
 
 class CarActivity : AppCompatActivity() {
@@ -26,8 +29,11 @@ class CarActivity : AppCompatActivity() {
 
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton)
         val carfixAddButton = findViewById<Button>(R.id.addCarFixButton)
-        val sumCar = findViewById<Button>(R.id.showCarFix)
+        val sumCarButton = findViewById<Button>(R.id.showCarFix)
         val sumCarRepairs = findViewById<TextView>(R.id.sumCarRepairsDone)
+        val mDialogViewCar = LayoutInflater.from(this).inflate(R.layout.edit_car_popup, null)
+        val mBuilderCar = AlertDialog.Builder(this).setView(mDialogViewCar)
+        val mAlertDialogCar = mBuilderCar.create()
 
         recyclerView = findViewById(R.id.recyclerView3)
         initRecyclerView()
@@ -35,12 +41,14 @@ class CarActivity : AppCompatActivity() {
         val xdate = "today"
         getCar(xdate)
         getCarPrice(xdate)
+        val timeStamp = findViewById<TextView>(R.id.spanOfTimeViewCar)
+        timeStamp.text = buildString {
+            append("bieżącego dnia ")
+        }
         sumCarRepairs.text = adapter?.itemCount.toString()
-
-        registerForContextMenu(sumCar)
-
+        importFromRecyclerCar()
+        registerForContextMenu(sumCarButton)
         mainMenuButton.setOnClickListener{
-            val intent = Intent(this, MenuActivity::class.java)
             finish()
         }
         carfixAddButton.setOnClickListener{
@@ -160,10 +168,71 @@ class CarActivity : AppCompatActivity() {
         val timeSpan = findViewById<TextView>(R.id.spanOfTimeViewCar)
         timeSpan.text = buildString {
         append(" całości ")
-    }
+        }
         sumCar.text = buildString {
             append(roundedSum.toString())
             append(" zł")
+        }
+    }
+
+    private fun importFromRecyclerCar() {
+        sqLiteHelper = SQLiteHelper(this)
+        val intentCar = intent
+        val FixDetails = intentCar.getStringExtra("Details")
+        val FixPrice = intentCar.getStringExtra("Price")
+        val FixDate = intentCar.getStringExtra("FixDate")
+        val FixKm = intentCar.getStringExtra("FixKm")
+        val id = intentCar.getStringExtra("ID").toString()
+        val mDialogViewCar = LayoutInflater.from(this).inflate(R.layout.edit_car_popup, null)
+        val mBuilderCar = AlertDialog.Builder(this).setView(mDialogViewCar)
+        val mAlertDialogCar = mBuilderCar.create()
+        val editDetails = mDialogViewCar.findViewById<EditText>(R.id.editDetails)
+        editDetails.setText(FixDetails)
+        val editPrice = mDialogViewCar.findViewById<EditText>(R.id.editPriceCar)
+        editPrice.setText(FixPrice)
+        val editDate = mDialogViewCar.findViewById<EditText>(R.id.editDateCar)
+        editDate.setText(FixDate)
+        val editFixKm = mDialogViewCar.findViewById<EditText>(R.id.editKmCar)
+        editFixKm.setText(FixKm)
+
+        if(id != "null"){
+            mAlertDialogCar.show()
+            val deleteButton = mDialogViewCar.findViewById<Button>(R.id.buttonDeleteCar)
+            val cancelButton = mDialogViewCar.findViewById<Button>(R.id.buttonAbortCar)
+            val editButton = mDialogViewCar.findViewById<Button>(R.id.buttonEditCar)
+
+            deleteButton.setOnClickListener {
+                sqLiteHelper = SQLiteHelper(this)
+                sqLiteHelper.deleteCARFIX(Integer.valueOf(id))
+                mAlertDialogCar.dismiss()
+            }
+
+            cancelButton.setOnClickListener {
+                mAlertDialogCar.dismiss()
+                finish()
+            }
+
+            editButton.setOnClickListener {
+                sqLiteHelper = SQLiteHelper(this)
+                val intid = Integer.valueOf(id)
+                val newDetails = editDetails.text.toString()
+                val newPrice = editPrice.text.toString()
+                val newDate = editDate.text.toString()
+                val newKm = editFixKm.text.toString()
+                val car = CarModel(id = intid, fixdetails = newDetails, fixprice = newPrice, fixdate = newDate, carkm = newKm)
+                val status = sqLiteHelper.updateCARFIX(car)
+                if(status > -1){
+                    Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
+                    mAlertDialogCar.dismiss()
+                    finish()
+                }else {
+                    Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }else {
+            mAlertDialogCar.show()
+            mAlertDialogCar.dismiss()
         }
     }
 }
