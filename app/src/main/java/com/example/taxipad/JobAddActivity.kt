@@ -16,16 +16,16 @@ class JobAddActivity : AppCompatActivity() {
     lateinit var jobKm: EditText
     lateinit var jobPrice: EditText
     lateinit var dateInput: EditText
-    private lateinit var sqLiteHelper: SQLiteHelper
+    lateinit var sqLiteHelper: SQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_add)
         supportActionBar?.hide()
 
+        sqLiteHelper = SQLiteHelper(this)
         initView()
         importFromJobPlan()
-        sqLiteHelper = SQLiteHelper(this)
 
         //buttons
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton3)
@@ -39,7 +39,7 @@ class JobAddActivity : AppCompatActivity() {
             addJob()
         }
     }
-    private fun addJob(){
+    private fun addJob() {
         val start = jobStart.text.toString()
         val end = jobEnd.text.toString()
         val km  = jobKm.text.toString()
@@ -79,12 +79,15 @@ class JobAddActivity : AppCompatActivity() {
         val start1 = intent.getStringExtra("Start").toString()
         val date1 = intent.getStringExtra("Date").toString()
         val price1 = intent.getStringExtra("Price").toString()
+        val id1 = intent.getStringExtra("ID").toString()
+        val id = Integer.valueOf(id1)
         val dateArray: List<String> = price1.split(" ")
         val success1 = intent.getStringExtra("Success").toString()
         if (success1 == "1"){
             jobStart.setText(start1)
             jobPrice.setText(dateArray[0])
             dateInput.setText(date1)
+            sqLiteHelper.deletePLANJOB(id)
         }
         else{
             clearJobView()

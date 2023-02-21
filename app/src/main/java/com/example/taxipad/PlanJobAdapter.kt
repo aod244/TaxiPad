@@ -37,19 +37,6 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
         private var price = view.findViewById<TextView>(R.id.pricePlanJobTextView)
 
         init {
-            itemView.findViewById<Button>(R.id.jobDoneButton).setOnClickListener { v ->
-                val context: Context = v.context
-                val intent = Intent(context, JobAddActivity::class.java)
-                val start = start.text
-                val date = date.text
-                val price = price.text
-                val success = "1"
-                intent.putExtra("Start",start)
-                intent.putExtra("Date",date)
-                intent.putExtra("Price",price)
-                intent.putExtra("Success",success)
-                context.startActivity(intent)
-            }
         }
 
         fun bindView(std: PlanModel){
@@ -58,6 +45,21 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
             price.text = buildString {
                 append(std.jobprice)
                 append(" zł")
+            }
+            itemView.findViewById<Button>(R.id.jobDoneButton).setOnClickListener { v ->
+                val context: Context = v.context
+                val intent = Intent(context, JobAddActivity::class.java)
+                val start = start.text
+                val date = date.text
+                val price = price.text
+                val stringid = (std.id).toString()
+                val success = "1"
+                intent.putExtra("Start",start)
+                intent.putExtra("Date",date)
+                intent.putExtra("Price",price)
+                intent.putExtra("Success",success)
+                intent.putExtra("ID",stringid)
+                context.startActivity(intent)
             }
         }
 

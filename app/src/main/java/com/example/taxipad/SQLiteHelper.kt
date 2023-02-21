@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import kotlinx.coroutines.Job
 import kotlin.collections.ArrayList
 
 class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -94,6 +95,32 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
+    fun updateJOB(std: JobModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(JOBSTART, std.start)
+        contentValues.put(JOBEND, std.end)
+        contentValues.put(JOBKM, std.km)
+        contentValues.put(JOBPRICE, std.price)
+        contentValues.put(DATE, std.datejob)
+        val whereclause = "id=13"
+        val success = db.update(TABLE_NAME, contentValues, whereclause, null)
+        db.close()
+
+        return success
+    }
+
+    fun deleteJob(deleteID: Int): Int {
+        val db = this.writableDatabase
+
+
+        val success = db.delete(TABLE_NAME, ID +" = "+deleteID, null)
+
+        return success
+    }
+
     fun getJOB(currentDATE: String): ArrayList<JobModel> {
         val jobList: ArrayList<JobModel> = ArrayList()
         val calendar = Calendar.getInstance()
@@ -113,7 +140,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 x = "SELECT * FROM $TABLE_NAME  WHERE strftime('%Y',$DATE) = strftime('%Y',date('now')) AND  strftime('%m',$DATE) = strftime('%m',date('now', '-1 month'))"
             }
         } else if (currentDATE== "week"){
-            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) BETWEEN '$firstDayofWeek' AND DATE('$firstDayofWeek', '+6 days')"
+            x = "SELECT * FROM $TABLE_NAME WHERE date($DATE) BETWEEN $firstDayofWeek AND DATE('$firstDayofWeek', '+6 days')"
         }
         else {
             x = "SELECT * FROM $TABLE_NAME"
@@ -147,7 +174,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 km = cursor.getString(3)
                 date = cursor.getString(5)
 
-                val std = JobModel(start = start, end = end, price = price, km = km, ID = id, datejob = date)
+                val std = JobModel(ID = id, start = start, end = end, price = price, km = km, datejob = date)
                 jobList.add(std)
 
             }while (cursor.moveToNext())
@@ -198,8 +225,10 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         if(cursor.moveToFirst()){
             do{
                 price = cursor.getString(4)
-                val addprice = Integer.valueOf(price)
-                sumAllJobPrice += addprice
+                val addprice = price.toDoubleOrNull()
+                if (addprice != null) {
+                    sumAllJobPrice += addprice
+                }
             }while (cursor.moveToNext())
         }
 
@@ -269,6 +298,15 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         val success = db.insert(TABLE_NAME1, null, contentValues)
         db.close()
+        return success
+    }
+
+    fun deleteKM(deleteID: Int): Int {
+        val db = this.writableDatabase
+
+
+        val success = db.delete(TABLE_NAME1, ID +" = "+deleteID, null)
+
         return success
     }
 
@@ -395,6 +433,15 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun deleteCARFIX(deleteID: Int): Int {
+        val db = this.writableDatabase
+
+
+        val success = db.delete(TABLE_NAME2, ID +" = "+deleteID, null)
+
+        return success
+    }
+
     fun getCARFIX(currentDATE: String): ArrayList<CarModel> {
         val fixList: ArrayList<CarModel> = ArrayList()
         val calendar = Calendar.getInstance()
@@ -517,6 +564,15 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         val success = db.insert(TABLE_NAME3, null, contentValues)
         db.close()
         return  success
+    }
+
+    fun deleteFUEL(deleteID: Int): Int {
+        val db = this.writableDatabase
+
+
+        val success = db.delete(TABLE_NAME3, ID +" = "+deleteID, null)
+
+        return success
     }
 
     fun getFUEL(currentDATE: String): ArrayList<FuelModel> {
@@ -759,6 +815,15 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun deletePLANJOB(deleteID: Int): Int {
+        val db = this.writableDatabase
+
+
+        val success = db.delete(TABLE_NAME4, ID +" = "+deleteID, null)
+
+        return success
+    }
+
     fun getplanJOB(): ArrayList<PlanModel> {
         val planJobList: ArrayList<PlanModel> = ArrayList()
         val selectQuery = "SELECT * FROM $TABLE_NAME4"
@@ -774,17 +839,19 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             return ArrayList()
         }
 
+        var id: Int
         var start: String
         var date: String
         var price: String
 
         if (cursor.moveToFirst()){
             do{
+                id = cursor.getInt(0)
                 start = cursor.getString(1)
                 date = cursor.getString(2)
                 price = cursor.getString(3)
 
-                val std = PlanModel(jobstart = start, jobdate = date, jobprice = price)
+                val std = PlanModel(id= id,jobstart = start, jobdate = date, jobprice = price)
                 planJobList.add(std)
             }while (cursor.moveToNext())
         }

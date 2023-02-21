@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
     private var jobList: ArrayList<JobModel> = ArrayList()
-
     fun addItems(items:ArrayList<JobModel>) {
         this.jobList = items
     }
@@ -23,7 +24,6 @@ class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
 
     override fun onBindViewHolder(holder: JobViewHolder, position: Int) {
         val std = jobList[position]
-
         holder.bindView(std)
     }
 
@@ -54,10 +54,15 @@ class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
             date.text = buildString {
                 append(list[0])
             }
-        }
-        init {
             editButton.setOnClickListener {
-                Toast.makeText(itemView.context, "Click", Toast.LENGTH_SHORT).show()
+                val intent2 = Intent(itemView.context,JobActivity::class.java)
+                intent2.putExtra("Start",std.start)
+                intent2.putExtra("End",std.end)
+                intent2.putExtra("Price",std.price)
+                intent2.putExtra("Km",std.km)
+                intent2.putExtra("Date",std.datejob)
+                intent2.putExtra("ID",(std.ID).toString())
+                itemView.context.startActivity(intent2)
             }
         }
     }

@@ -39,7 +39,7 @@ class MenuActivityPlanJob : AppCompatActivity() {
         if(start.isEmpty() || date.isEmpty()){
             Toast.makeText(this, "Wpisz wszystkie potrzebne informacje!", Toast.LENGTH_SHORT).show()
         }else{
-            val planJob = PlanModel(jobstart = start, jobdate = date, jobprice = price)
+            val planJob = PlanModel(jobstart = start, jobdate = date, jobprice = price, id = 0)
             val status = sqLiteHelper.planJOB(planJob)
             if(status > -1){
                 Toast.makeText(this, "Kurs zaplanowany!", Toast.LENGTH_SHORT).show()
