@@ -174,6 +174,7 @@ class JobActivity : AppCompatActivity() {
         val mDialogViewJob = LayoutInflater.from(this).inflate(R.layout.edit_job_popup, null)
         val mBuilderJob = AlertDialog.Builder(this).setView(mDialogViewJob)
         val mAlertDialogJob = mBuilderJob.create()
+
         val editStart = mDialogViewJob.findViewById<EditText>(R.id.editStart)
         editStart.setText(start)
         val editEnd = mDialogViewJob.findViewById<EditText>(R.id.editEnd)

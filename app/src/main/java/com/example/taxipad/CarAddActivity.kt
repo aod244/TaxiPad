@@ -60,7 +60,7 @@ class CarAddActivity : AppCompatActivity() {
     }
 
     private fun getDate() {
-        val dateNow: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        val dateNow: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         val date = findViewById<View>(R.id.carFixDate) as TextView
         date.text = dateNow
     }

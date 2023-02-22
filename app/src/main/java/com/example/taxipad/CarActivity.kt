@@ -31,10 +31,8 @@ class CarActivity : AppCompatActivity() {
         val carfixAddButton = findViewById<Button>(R.id.addCarFixButton)
         val sumCarButton = findViewById<Button>(R.id.showCarFix)
         val sumCarRepairs = findViewById<TextView>(R.id.sumCarRepairsDone)
-        val mDialogViewCar = LayoutInflater.from(this).inflate(R.layout.edit_car_popup, null)
-        val mBuilderCar = AlertDialog.Builder(this).setView(mDialogViewCar)
-        val mAlertDialogCar = mBuilderCar.create()
 
+        importFromRecyclerCar()
         recyclerView = findViewById(R.id.recyclerView3)
         initRecyclerView()
         sqLiteHelper = SQLiteHelper(this)
@@ -46,7 +44,6 @@ class CarActivity : AppCompatActivity() {
             append("bieżącego dnia ")
         }
         sumCarRepairs.text = adapter?.itemCount.toString()
-        importFromRecyclerCar()
         registerForContextMenu(sumCarButton)
         mainMenuButton.setOnClickListener{
             finish()
@@ -54,6 +51,8 @@ class CarActivity : AppCompatActivity() {
         carfixAddButton.setOnClickListener{
             val intent = Intent(this, CarAddActivity::class.java)
             startActivity(intent)
+        }
+        sumCarButton.setOnClickListener {
         }
 
     }
@@ -178,14 +177,15 @@ class CarActivity : AppCompatActivity() {
     private fun importFromRecyclerCar() {
         sqLiteHelper = SQLiteHelper(this)
         val intentCar = intent
-        val FixDetails = intentCar.getStringExtra("Details")
-        val FixPrice = intentCar.getStringExtra("Price")
-        val FixDate = intentCar.getStringExtra("FixDate")
-        val FixKm = intentCar.getStringExtra("FixKm")
-        val id = intentCar.getStringExtra("ID").toString()
+        val FixDetails = intentCar.getStringExtra("Details").toString()
+        val FixPrice = intentCar.getStringExtra("Price").toString()
+        val FixDate = intentCar.getStringExtra("FixDate").toString()
+        val FixKm = intentCar.getStringExtra("FixKm").toString()
+        val id = intentCar.getStringExtra("Id").toString()
         val mDialogViewCar = LayoutInflater.from(this).inflate(R.layout.edit_car_popup, null)
         val mBuilderCar = AlertDialog.Builder(this).setView(mDialogViewCar)
         val mAlertDialogCar = mBuilderCar.create()
+
         val editDetails = mDialogViewCar.findViewById<EditText>(R.id.editDetails)
         editDetails.setText(FixDetails)
         val editPrice = mDialogViewCar.findViewById<EditText>(R.id.editPriceCar)
@@ -231,7 +231,6 @@ class CarActivity : AppCompatActivity() {
             }
 
         }else {
-            mAlertDialogCar.show()
             mAlertDialogCar.dismiss()
         }
     }

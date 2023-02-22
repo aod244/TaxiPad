@@ -54,7 +54,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
                 intentCar.putExtra("Price",std.fixprice)
                 intentCar.putExtra("FixDate",std.fixdate)
                 intentCar.putExtra("FixKm",std.carkm)
-                intentCar.putExtra("Id",std.id)
+                intentCar.putExtra("Id",(std.id).toString())
                 itemView.context.startActivity(intentCar)
             }
         }

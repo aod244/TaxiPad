@@ -1,8 +1,10 @@
 package com.example.taxipad
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -30,6 +32,7 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
         private var endkm = view.findViewById<TextView>(R.id.endKmTextView)
         private var sum = view.findViewById<TextView>(R.id.kmDrivenTextView)
         private var datekm = view.findViewById<TextView>(R.id.kmDateTextView)
+        private var editButton = view.findViewById<Button>(R.id.editButton)
 
         fun bindView(std: KmModel){
             val string = std.datekm
@@ -48,8 +51,15 @@ class KilometersAdapter : RecyclerView.Adapter<KilometersAdapter.KilometersViewH
                 append(" km")
             }
             datekm.text = dateArray[0]
-
-
+            editButton.setOnClickListener {
+                val intentKm = Intent(itemView.context,KilometersActivity::class.java)
+                intentKm.putExtra("StartKm",std.startkm)
+                intentKm.putExtra("EndKm",std.endkm)
+                intentKm.putExtra("SumKm",std.drivenkm)
+                intentKm.putExtra("DateKm",std.datekm)
+                intentKm.putExtra("Id",(std.id).toString())
+                itemView.context.startActivity(intentKm)
+            }
         }
     }
 }

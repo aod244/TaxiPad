@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
     private var jobList: ArrayList<JobModel> = ArrayList()
+
     fun addItems(items:ArrayList<JobModel>) {
         this.jobList = items
     }

@@ -4,10 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.math.RoundingMode
@@ -32,7 +36,7 @@ class KilometersActivity : AppCompatActivity() {
         getAllSumJobsKm(xdate)
         getAllKm(xdate)
         sumWorkDays.text = adapter?.itemCount.toString()
-
+        importFromRecyclerKm()
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton)
         val addKmButton = findViewById<Button>(R.id.addKm)
         val showKmButton = findViewById<Button>(R.id.showKm)
@@ -169,5 +173,65 @@ class KilometersActivity : AppCompatActivity() {
             append(roundedSum.toString())
             append(" km")
         }
+    }
+    private fun importFromRecyclerKm() {
+        sqLiteHelper = SQLiteHelper(this)
+        val intentKm = intent
+        val kmstart = intentKm.getStringExtra("StartKm").toString()
+        val kmend = intentKm.getStringExtra("EndKm").toString()
+        val sumkm = intentKm.getStringExtra("SumKm").toString()
+        val datekm = intentKm.getStringExtra("DateKm").toString()
+        val id = intentKm.getStringExtra("Id").toString()
+        val mDialogViewKm = LayoutInflater.from(this).inflate(R.layout.edit_km_popup, null)
+        val mBuilderKm = AlertDialog.Builder(this).setView(mDialogViewKm)
+        val mAlertDialogKm = mBuilderKm.create()
+
+        val editStartKm = mDialogViewKm.findViewById<EditText>(R.id.editKmStart)
+        editStartKm.setText(kmstart)
+        val editEndKm = mDialogViewKm.findViewById<EditText>(R.id.editKmEnd)
+        editEndKm.setText(kmend)
+        val editKmSum = mDialogViewKm.findViewById<EditText>(R.id.editKmSum)
+        editKmSum.setText(sumkm)
+        val editKmDate = mDialogViewKm.findViewById<EditText>(R.id.editKmDate)
+        editKmDate.setText(datekm)
+
+        if(id != "null"){
+            mAlertDialogKm.show()
+            val deleteButton = mDialogViewKm.findViewById<Button>(R.id.buttonDeleteKm)
+            val cancelButton = mDialogViewKm.findViewById<Button>(R.id.buttonAbortKm)
+            val editButton = mDialogViewKm.findViewById<Button>(R.id.buttonEditKm)
+            deleteButton.setOnClickListener {
+                sqLiteHelper = SQLiteHelper(this)
+                sqLiteHelper.deleteKM(Integer.valueOf(id))
+                mAlertDialogKm.dismiss()
+            }
+            cancelButton.setOnClickListener {
+                mAlertDialogKm.dismiss()
+                finish()
+            }
+            editButton.setOnClickListener {
+                sqLiteHelper = SQLiteHelper(this)
+                val intid = Integer.valueOf(id)
+                val newStartKm = editStartKm.text.toString()
+                val newEndKm = editEndKm.text.toString()
+                val newSumKm = (Integer.valueOf(newEndKm)- Integer.valueOf(newStartKm)).toString()
+                val newDateKm = editKmDate.text.toString()
+                val km = KmModel(id = intid, startkm = newStartKm, endkm = newEndKm, drivenkm = newSumKm, datekm = newDateKm)
+                val status = sqLiteHelper.updateKM(km)
+                if(status > -1){
+                    Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
+                    mAlertDialogKm.dismiss()
+                    finish()
+                }else {
+                    Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        }else {
+            mAlertDialogKm.show()
+            mAlertDialogKm.dismiss()
+        }
+
     }
 }

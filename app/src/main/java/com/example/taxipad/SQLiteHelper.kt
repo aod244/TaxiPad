@@ -302,6 +302,23 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun updateKM(std: KmModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(KMSTART, std.startkm)
+        contentValues.put(KMEND, std.endkm)
+        contentValues.put(KMDRIVEN, std.drivenkm)
+        contentValues.put(DATE, std.datekm)
+        val id = (std.id).toString()
+        val whereclause = "id=$id"
+        val success = db.update(TABLE_NAME1, contentValues, whereclause, null)
+        db.close()
+
+        return success
+    }
+
     fun deleteKM(deleteID: Int): Int {
         val db = this.writableDatabase
 
@@ -352,15 +369,17 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var end: String
         var sum: String
         var date: String
+        var id: Int
 
         if (cursor.moveToFirst()){
             do{
+                id = cursor.getInt(0)
                 start = cursor.getString(1)
                 end = cursor.getString(2)
                 sum = cursor.getString(3)
                 date = cursor.getString(4)
 
-                val std = KmModel(startkm = start, endkm = end, drivenkm = sum, datekm = date)
+                val std = KmModel(startkm = start, endkm = end, drivenkm = sum, datekm = date, id = id)
                 kmList.add(std)
             }while (cursor.moveToNext())
         }
@@ -501,15 +520,17 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var price: String
         var carkm: String
         var fixdate:String
+        var id: Int
 
         if (cursor.moveToFirst()){
             do{
+                id = cursor.getInt(0)
                 details = cursor.getString(1)
                 price = cursor.getString(2)
                 carkm = cursor.getString(3)
                 fixdate = cursor.getString(4)
 
-                val std = CarModel(fixdetails = details, fixprice = price, carkm = carkm, fixdate = fixdate)
+                val std = CarModel(id = id,fixdetails = details, fixprice = price, carkm = carkm, fixdate = fixdate)
                 fixList.add(std)
             }while (cursor.moveToNext())
         }
