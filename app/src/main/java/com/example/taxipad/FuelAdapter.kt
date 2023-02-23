@@ -1,8 +1,10 @@
 package com.example.taxipad
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -32,6 +34,7 @@ class FuelAdapter : RecyclerView.Adapter<FuelAdapter.FuelViewHolder>() {
         private var litersprice = view.findViewById<TextView>(R.id.fuelDateTextView)
         private var km = view.findViewById<TextView>(R.id.fuelKmTextView)
         private var date = view.findViewById<TextView>(R.id.fuelDateView)
+        private var editButton = view.findViewById<Button>(R.id.editButton)
 
         fun bindView(std: FuelModel){
             val string = std.datefuel
@@ -54,6 +57,16 @@ class FuelAdapter : RecyclerView.Adapter<FuelAdapter.FuelViewHolder>() {
                 append(" zł/l")
             }
             date.text = dateArray[0]
+            editButton.setOnClickListener {
+                val intentFuel = Intent(itemView.context,FuelActivity::class.java)
+                intentFuel.putExtra("DetailsFuel",std.detailsfuel)
+                intentFuel.putExtra("KmFuel",std.kmfuel)
+                intentFuel.putExtra("FuelPrice",std.liters)
+                intentFuel.putExtra("PriceLiter",std.priceliter)
+                intentFuel.putExtra("FuelDate",std.datefuel)
+                intentFuel.putExtra("Id",(std.id).toString())
+                itemView.context.startActivity(intentFuel)
+            }
         }
     }
 }

@@ -605,6 +605,25 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return  success
     }
 
+    fun updateFUEL(std: FuelModel): Int {
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+
+        contentValues.put(FUELDETAILS, std.detailsfuel)
+        contentValues.put(FUELKM, std.kmfuel)
+        contentValues.put(LITERPRICE, std.priceliter)
+        contentValues.put(LITERS, std.liters)
+        contentValues.put(DATE, std.datefuel)
+
+        val id = (std.id).toString()
+        val whereclause = "id=$id"
+        val success = db.update(TABLE_NAME3, contentValues, whereclause, null)
+        db.close()
+
+        return success
+    }
+
     fun deleteFUEL(deleteID: Int): Int {
         val db = this.writableDatabase
 
@@ -656,16 +675,18 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var priceliter: String
         var liter:String
         var date:String
+        var id: Int
 
         if (cursor.moveToFirst()){
             do{
+                id = cursor.getInt(0)
                 details = cursor.getString(1)
                 km = cursor.getString(2)
                 priceliter = cursor.getString(3)
                 liter = cursor.getString(4)
                 date = cursor.getString(cursor.getColumnIndexOrThrow("data"))
 
-                val std = FuelModel(detailsfuel = details, kmfuel = km, priceliter = priceliter, liters = liter, datefuel = date)
+                val std = FuelModel(id = id,detailsfuel = details, kmfuel = km, priceliter = priceliter, liters = liter, datefuel = date)
                 fuelList.add(std)
             }while (cursor.moveToNext())
         }
@@ -829,7 +850,7 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             do{
                 priceliter = cursor.getString(3)
                 count += 1
-                var addpriceliter = priceliter.toDoubleOrNull()
+                val addpriceliter = priceliter.toDoubleOrNull()
                 if (addpriceliter != null) {
                     pricelitersum += addpriceliter
                     avgFuelPrice = pricelitersum/count

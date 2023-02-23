@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.math.RoundingMode
@@ -40,7 +43,7 @@ class FuelActivity : AppCompatActivity() {
         getAllFuel(xdate)
         getAllFuelLitters(xdate)
         avgAllFuelPrice(xdate)
-
+        importFromRecyclerFuel()
         registerForContextMenu(showButton)
 
         mainMenuButton.setOnClickListener{
@@ -156,6 +159,7 @@ class FuelActivity : AppCompatActivity() {
     private fun getFuel(xdate: String) {
         val fuelList = sqLiteHelper.getFUEL(xdate)
         adapter?.addItems(fuelList)
+        adapter?.notifyDataSetChanged()
     }
 
     private fun getAllFuel(xdate: String) {
@@ -188,5 +192,67 @@ class FuelActivity : AppCompatActivity() {
             append(roundedSum.toString())
             append(" zł")
         }
+    }
+
+    private fun importFromRecyclerFuel() {
+        sqLiteHelper = SQLiteHelper(this)
+        val intentFuel = intent
+        val fueldetails = intentFuel.getStringExtra("DetailsFuel").toString()
+        val fuelKm = intentFuel.getStringExtra("KmFuel").toString()
+        val fuelPrice = intentFuel.getStringExtra("FuelPrice").toString()
+        val literPrice = intentFuel.getStringExtra("PriceLiter").toString()
+        val fuelDate = intentFuel.getStringExtra("FuelDate").toString()
+        val id = intentFuel.getStringExtra("Id").toString()
+        val mDialogViewFuel = LayoutInflater.from(this).inflate(R.layout.edit_fuel_popup, null)
+        val mBuilderFuel = AlertDialog.Builder(this).setView(mDialogViewFuel)
+        val mAlertDialogFuel = mBuilderFuel.create()
+
+        val editDetails = mDialogViewFuel.findViewById<EditText>(R.id.editFuleDetails)
+        val editfuelKm = mDialogViewFuel.findViewById<EditText>(R.id.editFuelKm)
+        val editfuelPrice = mDialogViewFuel.findViewById<EditText>(R.id.editFuelPrice)
+        val editliterPrice = mDialogViewFuel.findViewById<EditText>(R.id.editFuelPriceLiter)
+        val editDateFuel = mDialogViewFuel.findViewById<EditText>(R.id.editDateFuel)
+        editDetails.setText(fueldetails)
+        editfuelKm.setText(fuelKm)
+        editfuelPrice.setText(fuelPrice)
+        editliterPrice.setText(literPrice)
+        editDateFuel.setText(fuelDate)
+
+        if(id != "null"){
+            mAlertDialogFuel.show()
+            val deleteButton = mDialogViewFuel.findViewById<Button>(R.id.buttonDelete)
+            val cancelButton = mDialogViewFuel.findViewById<Button>(R.id.buttonAbort)
+            val editButton = mDialogViewFuel.findViewById<Button>(R.id.buttonEdit)
+
+            deleteButton.setOnClickListener {
+                sqLiteHelper.deleteFUEL(Integer.valueOf(id))
+                mAlertDialogFuel.dismiss()
+            }
+            cancelButton.setOnClickListener {
+                mAlertDialogFuel.dismiss()
+                finish()
+            }
+            editButton.setOnClickListener {
+                val intid = Integer.valueOf(id)
+                val newDetails = editDetails.text.toString()
+                val newKm = editfuelKm.text.toString()
+                val newPrice = editfuelPrice.text.toString()
+                val newLiterPrice = editliterPrice.text.toString()
+                val newDate = editDateFuel.text.toString()
+                val fuel = FuelModel(id = intid, detailsfuel = newDetails, kmfuel = newKm, liters = newPrice, priceliter = newLiterPrice, datefuel = newDate)
+                val status = sqLiteHelper.updateFUEL(fuel)
+                if(status > -1){
+                    Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
+                    mAlertDialogFuel.dismiss()
+                    finish()
+                }else {
+                    Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }else {
+            mAlertDialogFuel.show()
+            mAlertDialogFuel.dismiss()
+        }
+
     }
 }

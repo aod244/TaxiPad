@@ -65,5 +65,6 @@ class MenuActivity : AppCompatActivity() {
     private fun getPlanJobs() {
         val planjoblist =sqLiteHelper.getplanJOB()
         adapter?.addItems(planjoblist)
+        adapter?.notifyDataSetChanged()
     }
 }

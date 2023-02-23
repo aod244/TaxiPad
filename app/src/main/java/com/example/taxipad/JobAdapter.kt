@@ -19,6 +19,10 @@ class JobAdapter : RecyclerView.Adapter<JobAdapter.JobViewHolder>() {
         this.jobList = items
     }
 
+    fun update(modelList:ArrayList<JobModel>) {
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = JobViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.card_items_job, parent, false)
     )

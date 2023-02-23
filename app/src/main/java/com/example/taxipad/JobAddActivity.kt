@@ -26,7 +26,6 @@ class JobAddActivity : AppCompatActivity() {
         sqLiteHelper = SQLiteHelper(this)
         initView()
         importFromJobPlan()
-
         //buttons
         val mainMenuButton = findViewById<Button>(R.id.tomenubutton3)
         val addJobButton = findViewById<Button>(R.id.addJobButton)
@@ -49,9 +48,13 @@ class JobAddActivity : AppCompatActivity() {
         }else{
             val job = JobModel(start = start, end = end, km = km, price = price)
             val status = sqLiteHelper.addJOB(job)
+            val importID = importFromJobPlan()
             if(status > -1){
                 Toast.makeText(this, "Kurs dodany!", Toast.LENGTH_SHORT).show()
                 clearJobView()
+                if(importID != 0) {
+                    sqLiteHelper.deletePLANJOB(importID)
+                }
                 finish()
             }else {
                 Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
@@ -74,7 +77,7 @@ class JobAddActivity : AppCompatActivity() {
         jobPrice.setText("")
     }
 
-    private fun importFromJobPlan() {
+    private fun importFromJobPlan(): Int  {
         sqLiteHelper = SQLiteHelper(this)
         val intent = intent
         val start1 = intent.getStringExtra("Start").toString()
@@ -87,11 +90,11 @@ class JobAddActivity : AppCompatActivity() {
             jobStart.setText(start1)
             jobPrice.setText(dateArray[0])
             dateInput.setText(date1)
-            sqLiteHelper.deletePLANJOB(id)
         }
         else{
             clearJobView()
         }
+        return id
     }
 
 }
