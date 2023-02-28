@@ -62,7 +62,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/cardview_style"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="Zliczanie czasu pracy?"
+        android:text="Wersja wczesnego dostępu. Problemy zgłaszać na filip.ostrowski96@gmail.com "
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

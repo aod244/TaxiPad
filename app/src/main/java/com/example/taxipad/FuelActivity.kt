@@ -23,8 +23,6 @@ class FuelActivity : AppCompatActivity() {
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter: FuelAdapter? = null
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM")
-    private val current = LocalDateTime.now().format(formatter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,7 +157,6 @@ class FuelActivity : AppCompatActivity() {
     private fun getFuel(xdate: String) {
         val fuelList = sqLiteHelper.getFUEL(xdate)
         adapter?.addItems(fuelList)
-        adapter?.notifyDataSetChanged()
     }
 
     private fun getAllFuel(xdate: String) {
