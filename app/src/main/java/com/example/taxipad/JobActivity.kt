@@ -219,13 +219,17 @@ class JobActivity : AppCompatActivity() {
                         km = newKm,
                         datejob = newDate
                 )
-                val status = sqLiteHelper.updateJOB(job)
-                if(status > -1){
-                    Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
-                    mAlertDialogJob.dismiss()
-                    finish()
-                }else {
-                    Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
+                if(newStart.isEmpty() || newEnd.isEmpty() || newPrice.isEmpty() || newKm.isEmpty() || newDate.isEmpty()){
+                    Toast.makeText(this, "Wpisz wszystkie potrzebne informacje!", Toast.LENGTH_SHORT).show()
+                }else{
+                    val status = sqLiteHelper.updateJOB(job)
+                    if(status > -1){
+                        Toast.makeText(this, "Kurs zaktualizowany!", Toast.LENGTH_SHORT).show()
+                        mAlertDialogJob.dismiss()
+                        finish()
+                    }else {
+                        Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }else {

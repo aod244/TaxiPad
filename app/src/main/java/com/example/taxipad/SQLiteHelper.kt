@@ -328,6 +328,29 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return success
     }
 
+    fun getLATESTKM(): String{
+        val selectQuery = "SELECT * FROM $TABLE_NAME1"
+        val db = this.readableDatabase
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return String()
+        }
+
+        var latestKM = ""
+
+        if (cursor.moveToLast()){
+            latestKM = cursor.getString(2)
+            }
+
+        return latestKM
+    }
+
     fun getKM(currentDATE: String): ArrayList<KmModel> {
         val kmList: ArrayList<KmModel> = ArrayList()
         val calendar = Calendar.getInstance()

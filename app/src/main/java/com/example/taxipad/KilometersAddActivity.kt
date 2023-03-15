@@ -28,6 +28,7 @@ class KilometersAddActivity : AppCompatActivity() {
         val addKmButton = findViewById<Button>(R.id.addKmButton)
         val sumButton = findViewById<Button>(R.id.sumKmButton)
 
+        getLatestKm()
         sumButton.setOnClickListener{
             sumKM()
         }
@@ -70,11 +71,24 @@ class KilometersAddActivity : AppCompatActivity() {
     private fun sumKM(){
         val start = startkm.text
         val end = endkm.text
-        if(start.isNotEmpty() || end.isNotEmpty()){
+        if(start.isEmpty() || end.isEmpty()) {
+            Toast.makeText(this, "Wpisz wszystkie potrzebne informacje!", Toast.LENGTH_SHORT).show()
+        }else{
             val start1 = Integer.valueOf(startkm.text.toString())
             val end1 = Integer.valueOf(endkm.text.toString())
             val sum = (end1 - start1)
             drivenkm.text = sum.toString()
+        }
+    }
+
+    private fun getLatestKm() {
+        val latestKM = sqLiteHelper.getLATESTKM()
+        if (latestKM.isBlank()){
+            startkm.hint = buildString {
+                append("Przebieg Koncowy")
+            }
+        }else{
+            startkm.setText(latestKM)
         }
     }
 }

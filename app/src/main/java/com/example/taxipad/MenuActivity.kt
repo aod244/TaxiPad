@@ -54,6 +54,11 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, MenuActivityPlanJob::class.java)
             startActivity(intent)
         }
+        val settings = findViewById<Button>(R.id.logoutbutton)
+        settings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initRecyclerView(){
@@ -65,6 +70,5 @@ class MenuActivity : AppCompatActivity() {
     private fun getPlanJobs() {
         val planjoblist =sqLiteHelper.getplanJOB()
         adapter?.addItems(planjoblist)
-        adapter?.notifyDataSetChanged()
     }
 }
