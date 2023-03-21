@@ -47,7 +47,6 @@ class JobActivity : AppCompatActivity() {
         importFromRecyclerJob()
         registerForContextMenu(showJobButton)
         mainMenuButton.setOnClickListener{
-            Intent(this, MenuActivity::class.java)
             finish()
         }
         jobAddButton.setOnClickListener{
@@ -63,8 +62,7 @@ class JobActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
+        when (item.itemId) {
 
             R.id.option_1 -> {
                 val timeStamp = findViewById<TextView>(R.id.spanOfTimeView)

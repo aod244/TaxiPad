@@ -38,6 +38,7 @@ class JobAddActivity : AppCompatActivity() {
             addJob()
         }
     }
+
     private fun addJob() {
         val start = jobStart.text.toString()
         val end = jobEnd.text.toString()
@@ -60,8 +61,8 @@ class JobAddActivity : AppCompatActivity() {
                 Toast.makeText(this, "Blad!", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
+
     private fun initView() {
         jobStart = findViewById(R.id.JobStartInput)
         jobEnd = findViewById(R.id.JobEndInput)
@@ -78,15 +79,13 @@ class JobAddActivity : AppCompatActivity() {
     }
 
     private fun importFromJobPlan(): Int  {
-        sqLiteHelper = SQLiteHelper(this)
         val intent = intent
         val start1 = intent.getStringExtra("Start").toString()
         val date1 = intent.getStringExtra("Date").toString()
         val price1 = intent.getStringExtra("Price").toString()
         val id = intent.getIntExtra("ID", 0)
         val dateArray: List<String> = price1.split(" ")
-        val success1 = intent.getStringExtra("Success").toString()
-        if (success1 == "1"){
+        if (id != 0){
             jobStart.setText(start1)
             jobPrice.setText(dateArray[0])
             dateInput.setText(date1)

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -36,9 +35,6 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
         private var date = view.findViewById<TextView>(R.id.dateTextView)
         private var price = view.findViewById<TextView>(R.id.pricePlanJobTextView)
 
-        init {
-        }
-
         fun bindView(std: PlanModel){
             start.text = std.jobstart
             date.text = std.jobdate
@@ -53,11 +49,9 @@ class PlanJobAdapter : RecyclerView.Adapter<PlanJobAdapter.PlanJobViewHolder>() 
                 val date = date.text
                 val price = price.text
                 val stringid = (std.id)
-                val success = "1"
                 intent.putExtra("Start",start)
                 intent.putExtra("Date",date)
                 intent.putExtra("Price",price)
-                intent.putExtra("Success",success)
                 intent.putExtra("ID",stringid)
                 context.startActivity(intent)
             }
