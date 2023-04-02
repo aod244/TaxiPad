@@ -1,7 +1,7 @@
 package com.example.taxipad
 
-import android.content.ContentValues
 import android.content.Context
+import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -58,8 +58,16 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createTable = ("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + JOBSTART + " TEXT," + JOBEND + " TEXT," + JOBKM + " TEXT," + JOBPRICE + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
-        val createTable1 = ("CREATE TABLE " + TABLE_NAME1 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KMSTART + " TEXT," + KMEND + " TEXT," + KMDRIVEN + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
+        val createTable = ("CREATE TABLE " + TABLE_NAME +
+                "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + JOBSTART + " TEXT," + JOBEND + " TEXT,"
+                + JOBKM + " TEXT," + JOBPRICE + " TEXT,"
+                + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
+        val createTable1 = ("CREATE TABLE " + TABLE_NAME1 +
+                "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KMSTART + " TEXT," + KMEND + " TEXT,"
+                + KMDRIVEN + " TEXT,"
+                + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
         val createTable2 = ("CREATE TABLE " + TABLE_NAME2 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FIXDETAILS + " TEXT," + FIXPRICE + " TEXT," + CARKM + " TEXT," + FIXDATE + " TEXT" + ")");
         val createTable3 = ("CREATE TABLE " + TABLE_NAME3 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + FUELDETAILS + " TEXT," + FUELKM + " TEXT," + LITERPRICE + " TEXT," + LITERS + " TEXT," + DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL" + ")");
         val createTable4 = ("CREATE TABLE " + TABLE_NAME4 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + PLANJOBSTART + " TEXT," + PLANJOBDATE + " TEXT," + PLANJOBPRICE + " TEXT" + ")");
@@ -115,7 +123,6 @@ class SQLiteHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun deleteJob(deleteID: Int): Int {
         val db = this.writableDatabase
-
 
         val success = db.delete(TABLE_NAME, ID +" = "+deleteID, null)
 
